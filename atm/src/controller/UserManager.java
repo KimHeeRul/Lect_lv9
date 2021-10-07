@@ -15,11 +15,13 @@ public class UserManager {
 	private String text = "";
 	// user -중앙 총 데이터
 	public static UserManager instance = new UserManager();
-
+	private ArrayList<User> users = new ArrayList<>();
 	private UserManager() {
+		User newUser = new User(0000, "admin", "0000", "admin");
+		this.users.add(newUser);
 	}
 
-	private ArrayList<User> users = new ArrayList<>();
+	
 
 	public void joinUser() {
 		System.out.println("id:  ");
@@ -68,9 +70,8 @@ public class UserManager {
 	public int withdrawal(int log) {
 		System.out.println("pw:  ");
 		String pw = Bank.scan.next();
-		int idx = -1;
 		if (users.get(log).getPw().equals(pw)) {
-			users.remove(idx);
+			users.remove(log);
 			System.out.println("회원탈퇴 완료");
 			return -1;
 		} else {
@@ -148,7 +149,7 @@ public class UserManager {
 	}
 
 	public void deposit(int log) {
-		System.out.print("계좌선택:");
+		System.out.print("계좌선택(accNo):");
 		String AcNum = Bank.scan.next();
 		int idx = -1;
 		for (int i = 0; i < users.get(log).getAccCnt(); i++) {
@@ -264,13 +265,43 @@ public class UserManager {
 
 	public void load() {
 		text = "";
-		for (int i = 0; i < this.users.size(); i++) {
-			for (int j = 0; j < this.users.get(i).getAccCnt(); j++) {
-				this.users.get(i).setAcc(new ArrayList<>());
+		this.users = new ArrayList<>();//초기화
+		FileReader fr = null;
+		BufferedReader br = null;
+		try {
+			File file = new File("test.txt");
+			fr = new FileReader(file);
+			br = new BufferedReader(fr);
+			String data = "";
+			while (data != null) {
+				data = br.readLine();
+				if (data != null) {
+					this.text += data;
+					this.text += "\n";
+				}
 			}
 
-		}
+			String arr[] = this.text.split("\n");
+			for (int i = 0; i < arr.length; i++) {
+				String arr2[] = arr[i].split("/");
+				int code = Integer.parseInt(arr2[0]);
+				String id = arr2[1];
+				String pw = arr2[2];
+				String name = arr2[3];
+				User newUser = new User(code, id, pw, name);
+				this.users.add(newUser);
+				this.users.get(i).setAccCnt(Integer.parseInt(arr2[4]));
+				for (int j = 0; j < this.users.get(i).getAccCnt(); j++) {
+					this.users.get(i).getAcc().add(new Account());
+					this.users.get(i).getAcc().get(j).setAccNum(arr2[5 + j]);
+					this.users.get(i).getAcc().get(j).setMoney(Integer.parseInt(arr2[6 + j]));
+				}
 
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void board() {
@@ -278,6 +309,7 @@ public class UserManager {
 			System.out.print("code:" + this.users.get(i).getUserCode() + "  ");
 			System.out.print("id:" + this.users.get(i).getId() + " ");
 			System.out.print("pw:" + this.users.get(i).getPw() + " ");
+			System.out.print("name:" + this.users.get(i).getName() + " ");
 			System.out.print("accCnt:" + this.users.get(i).getAccCnt() + " ");
 			for (int j = 0; j < this.users.get(i).getAccCnt(); j++) {
 				System.out.print("accNo:" + this.users.get(i).getAcc().get(j).getAccNum() + ":");
@@ -292,6 +324,7 @@ public class UserManager {
 		System.out.print("code:" + this.users.get(log).getUserCode() + "  ");
 		System.out.print("id:" + this.users.get(log).getId() + " ");
 		System.out.print("pw:" + this.users.get(log).getPw() + " ");
+		System.out.print("name:" + this.users.get(log).getName() + " ");
 		System.out.print("accCnt:" + this.users.get(log).getAccCnt() + " ");
 		for (int j = 0; j < this.users.get(log).getAccCnt(); j++) {
 			System.out.print("accNo:" + this.users.get(log).getAcc().get(j).getAccNum() + ":");

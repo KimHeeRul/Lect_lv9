@@ -24,10 +24,13 @@ public class BankManager {
 	private void printMenu() {
 		if (Bank.log == -1) {
 
-			System.out.println("1.로그인\n2.회원가입\n3.종료");
+			System.out.println("1.로그인\n2.회원가입\n3.종료\n4.파일처리");
 		} else {
 			um.board();
-			System.out.println("1.탈퇴\n2.계좌개설\n3.계좌 철회\n4.뱅킹\n5.파일처리\n6.관리자모드\n7.로그아웃");
+			System.out.print("1.탈퇴\n2.계좌개설\n3.계좌 철회\n4.뱅킹\n5.로그아웃");
+			if (Bank.log == 0) {
+				System.out.println("\n6.관리자모드");
+			}
 		}
 	}
 
@@ -73,6 +76,9 @@ public class BankManager {
 				} else if (sel == 3) {
 					this.isRun = false;
 					System.out.println("ATM종료");
+				} else if (sel == 4) {
+					file();
+					um.board();
 				}
 			} else {
 				if (sel == 1) {
@@ -83,13 +89,10 @@ public class BankManager {
 					this.um.removeAcc(Bank.log);
 				} else if (sel == 4) {
 					bank();
-
 				} else if (sel == 5) {
-					file();
-				} else if (sel == 6) {
-					um.board();
-				} else if (sel == 7) {
 					Bank.log = this.um.logout();
+				} else if (sel == 6&&Bank.log == 0) {
+					um.board();
 				}
 			}
 		} catch (Exception e) {
