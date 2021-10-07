@@ -5,6 +5,8 @@ import models.Bank;
 public class BankManager {
 	boolean isRun = true;
 	private UserManager um = UserManager.instance;
+	private AccountManager am = AccountManager.instance;
+	private FileManager fm = FileManager.instance;
 	public static BankManager instance = new BankManager();
 
 	private BankManager() {
@@ -38,13 +40,13 @@ public class BankManager {
 		System.out.println("1.입금\n2.출금\n3.이체\n4.조회");
 		int sel = Bank.scan.nextInt();
 		if (sel == 1) {
-			this.um.deposit(Bank.log);
+			this.am.deposit(Bank.log);
 		} else if (sel == 2) {
-			this.um.outputMoney(Bank.log);
+			this.am.outputMoney(Bank.log);
 		} else if (sel == 3) {
-			this.um.transfer(Bank.log);
+			this.am.transfer(Bank.log);
 		} else if (sel == 4) {
-			this.um.pointBoard(Bank.log);
+			this.am.pointBoard(Bank.log);
 		}
 
 	}
@@ -53,9 +55,9 @@ public class BankManager {
 		System.out.println("1.세이브\n2.로드");
 		int sel = Bank.scan.nextInt();
 		if (sel == 1) {
-			this.um.save();
+			this.fm.save();
 		} else if (sel == 2) {
-			this.um.load();
+			this.fm.load();
 		}
 	}
 
@@ -84,9 +86,9 @@ public class BankManager {
 				if (sel == 1) {
 					Bank.log = this.um.withdrawal(Bank.log);
 				} else if (sel == 2) {
-					this.um.createAcc(Bank.log);
+					this.am.createAcc(Bank.log);
 				} else if (sel == 3) {
-					this.um.removeAcc(Bank.log);
+					this.am.removeAcc(Bank.log);
 				} else if (sel == 4) {
 					bank();
 				} else if (sel == 5) {

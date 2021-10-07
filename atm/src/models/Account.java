@@ -1,7 +1,5 @@
 package models;
 
-import java.util.Random;
-
 public class Account {
 	private String accNum;
 	private int Money;
