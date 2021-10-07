@@ -27,7 +27,7 @@ public class Main {
 		 * ㄴ UserManager (User 타입의 객체배열)
 		 * ㄴ AccountManager (Account 타입의 객체배열) 
 		 * ㄴ BankManager
-		 * ㄴ FileManager 
+		 * ㄴ FileManager S
 		 */
 		
 		Bank.setName("Green");
