@@ -18,6 +18,9 @@ public class AccountManager {
 		if (cnt < 3) {
 
 			um.getUsers().get(log).getAcc().add(new Account());
+			if (cnt == 0) {
+				this.um.getUsers().get(log).getAcc().get(0).setRep(true);
+			}
 			while (true) {
 				this.um.getUsers().get(log).getAcc().get(cnt).setAccNum(rand.nextInt(100) + 1 + "");
 				String num = this.um.getUsers().get(log).getAcc().get(cnt).getAccNum();
@@ -50,7 +53,13 @@ public class AccountManager {
 					idx = i;
 				}
 			}
-			if (idx != -1) {
+			int acidx = -1;
+			for (int i = 0; i < this.um.getUsers().get(log).getAccCnt(); i++) {
+				if (this.um.getUsers().get(log).getAcc().get(i).isRep()) {
+					acidx = i;
+				}
+			}
+			if (idx != -1&&idx!=acidx) {
 				if (um.getUsers().get(log).getAcc().get(idx).getMoney() > 0) {
 					System.out.println("계좌에  잔액이 남아있습니다,그럼에도 철회를 원하십니까?(yes:1,no:2");
 					int input2 = Bank.scan.nextInt();
@@ -66,7 +75,7 @@ public class AccountManager {
 				}
 
 			} else {
-				System.out.println("잘못된 계좌 번호입니다.");
+				System.out.println("잘못된 계좌 번호거나 대표계좌로 설정된계좌입니다 .");
 			}
 
 		} else {
@@ -75,12 +84,23 @@ public class AccountManager {
 	}
 
 	public void deposit(int log) {
-		System.out.print("계좌선택(accNo):");
-		String AcNum = Bank.scan.next();
+		System.out.println("대표계좌를 선택하시겠습니까?(yes:1,no:2)");
+		int sel = Bank.scan.nextInt();
 		int idx = -1;
-		for (int i = 0; i < um.getUsers().get(log).getAccCnt(); i++) {
-			if (um.getUsers().get(log).getAcc().get(i).getAccNum().equals(AcNum)) {
-				idx = i;
+		if (sel == 1) {
+			for (int i = 0; i < this.um.getUsers().get(log).getAccCnt(); i++) {
+				if (this.um.getUsers().get(log).getAcc().get(i).isRep()) {
+					idx = i;
+				}
+			}
+		} else if (sel == 2) {
+			System.out.print("내 계좌선택:");
+			String num = Bank.scan.next();
+
+			for (int i = 0; i < this.um.getUsers().get(log).getAccCnt(); i++) {
+				if (this.um.getUsers().get(log).getAcc().get(i).getAccNum().equals(num)) {
+					idx = i;
+				}
 			}
 		}
 		if (idx != -1) {
@@ -94,12 +114,23 @@ public class AccountManager {
 	}
 
 	public void outputMoney(int log) {
-		System.out.print("계좌선택:");
-		String AcNum = Bank.scan.next();
+		System.out.println("대표계좌를 선택하시겠습니까?(yes:1,no:2)");
+		int sel = Bank.scan.nextInt();
 		int idx = -1;
-		for (int i = 0; i < um.getUsers().get(log).getAccCnt(); i++) {
-			if (um.getUsers().get(log).getAcc().get(i).getAccNum().equals(AcNum)) {
-				idx = i;
+		if (sel == 1) {
+			for (int i = 0; i < this.um.getUsers().get(log).getAccCnt(); i++) {
+				if (this.um.getUsers().get(log).getAcc().get(i).isRep()) {
+					idx = i;
+				}
+			}
+		} else if (sel == 2) {
+			System.out.print("내 계좌선택:");
+			String num = Bank.scan.next();
+
+			for (int i = 0; i < this.um.getUsers().get(log).getAccCnt(); i++) {
+				if (this.um.getUsers().get(log).getAcc().get(i).getAccNum().equals(num)) {
+					idx = i;
+				}
 			}
 		}
 		if (idx != -1) {
@@ -118,15 +149,26 @@ public class AccountManager {
 	}
 
 	public void transfer(int log) {
-		System.out.print("내 계좌선택:");
-		String num = Bank.scan.next();
-//		String myAcc = "";
+		System.out.println("대표계좌에서 보내시겠습니까?(yes:1,no:2)");
+		int sel = Bank.scan.nextInt();
 		int acidx = -1;
-		for (int i = 0; i < this.um.getUsers().get(log).getAccCnt(); i++) {
-			if (this.um.getUsers().get(log).getAcc().get(i).getAccNum().equals(num)) {
-				acidx = i;
+		if (sel == 1) {
+			for (int i = 0; i < this.um.getUsers().get(log).getAccCnt(); i++) {
+				if (this.um.getUsers().get(log).getAcc().get(i).isRep()) {
+					acidx = i;
+				}
+			}
+		} else if (sel == 2) {
+			System.out.print("내 계좌선택:");
+			String num = Bank.scan.next();
+
+			for (int i = 0; i < this.um.getUsers().get(log).getAccCnt(); i++) {
+				if (this.um.getUsers().get(log).getAcc().get(i).getAccNum().equals(num)) {
+					acidx = i;
+				}
 			}
 		}
+
 		if (acidx != -1) {
 //			myAcc = this.um.getUsers().get(log).getAcc().get(acidx).getAccNum();
 			int myMoney = this.um.getUsers().get(log).getAcc().get(acidx).getMoney();
@@ -164,6 +206,31 @@ public class AccountManager {
 
 	}
 
+	public void repAccount(int log) {
+		pointBoard(log);
+		int idx2 = -1;
+		for (int i = 0; i < this.um.getUsers().get(log).getAccCnt(); i++) {
+			if (this.um.getUsers().get(log).getAcc().get(i).isRep()) {
+				idx2 = i;
+			}
+		}
+		System.out.println("변경할 대표계좌의 번호를 입력해주세요.");
+		String input = Bank.scan.next();
+		int idx = -1;
+		for (int i = 0; i < this.um.getUsers().get(log).getAccCnt(); i++) {
+			if (this.um.getUsers().get(log).getAcc().get(i).getAccNum().equals(input)) {
+				idx = i;
+			}
+		}
+		if (idx != -1) {
+			this.um.getUsers().get(log).getAcc().get(idx).setRep(true);
+			this.um.getUsers().get(log).getAcc().get(idx2).setRep(false);
+
+		} else {
+			System.out.println("잘못된 계좌번호입니다.");
+		}
+	}
+
 	public void pointBoard(int log) {
 		System.out.print("code:" + this.um.getUsers().get(log).getUserCode() + "  ");
 		System.out.print("id:" + this.um.getUsers().get(log).getId() + " ");
@@ -171,7 +238,10 @@ public class AccountManager {
 		System.out.print("name:" + this.um.getUsers().get(log).getName() + " ");
 		System.out.print("accCnt:" + this.um.getUsers().get(log).getAccCnt() + " ");
 		for (int j = 0; j < this.um.getUsers().get(log).getAccCnt(); j++) {
-			System.out.print("accNo:" + this.um.getUsers().get(log).getAcc().get(j).getAccNum() + ":");
+			System.out.print("accNo:" + this.um.getUsers().get(log).getAcc().get(j).getAccNum() + " ");
+			if (this.um.getUsers().get(log).getAcc().get(j).isRep()) {
+				System.out.print("(V)");
+			}
 			System.out.print("accMoney:" + this.um.getUsers().get(log).getAcc().get(j).getMoney() + " ");
 		}
 		System.out.println();

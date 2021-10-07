@@ -13,7 +13,7 @@ public class FileManager {
 	private String text = "";
 	public static FileManager instance = new FileManager();
 	private UserManager um = UserManager.instance;
-	
+
 	public void save() {
 		File file = new File("test.txt");
 		this.text = "";
@@ -25,6 +25,7 @@ public class FileManager {
 			this.text += this.um.getUsers().get(i).getAccCnt() + "/";
 			for (int j = 0; j < this.um.getUsers().get(i).getAccCnt(); j++) {
 				this.text += this.um.getUsers().get(i).getAcc().get(j).getAccNum() + "/";
+				this.text += this.um.getUsers().get(i).getAcc().get(j).isRep()+"/";
 				this.text += this.um.getUsers().get(i).getAcc().get(j).getMoney() + "/";
 			}
 			this.text += "\n";
@@ -41,7 +42,7 @@ public class FileManager {
 
 	public void load() {
 		text = "";
-		this.um.setUsers(new ArrayList<>());//초기화
+		this.um.setUsers(new ArrayList<>());// 초기화
 		FileReader fr = null;
 		BufferedReader br = null;
 		try {
@@ -67,11 +68,15 @@ public class FileManager {
 				User newUser = new User(code, id, pw, name);
 				this.um.getUsers().add(newUser);
 				this.um.getUsers().get(i).setAccCnt(Integer.parseInt(arr2[4]));
+				int cnt=0;
 				for (int j = 0; j < this.um.getUsers().get(i).getAccCnt(); j++) {
 					this.um.getUsers().get(i).getAcc().add(new Account());
-					this.um.getUsers().get(i).getAcc().get(j).setAccNum(arr2[5 + j]);
-					this.um.getUsers().get(i).getAcc().get(j).setMoney(Integer.parseInt(arr2[6 + j]));
+					this.um.getUsers().get(i).getAcc().get(j).setAccNum(arr2[5 + cnt]);
+					this.um.getUsers().get(i).getAcc().get(j).setRep(Boolean.parseBoolean(arr2[6+cnt]));	
+					this.um.getUsers().get(i).getAcc().get(j).setMoney(Integer.parseInt(arr2[7 + cnt]));
+					cnt=+3;
 				}
+				
 
 			}
 

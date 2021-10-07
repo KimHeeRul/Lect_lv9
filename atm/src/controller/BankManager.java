@@ -37,7 +37,7 @@ public class BankManager {
 	}
 
 	private void bank() {
-		System.out.println("1.입금\n2.출금\n3.이체\n4.조회");
+		System.out.println("1.입금\n2.출금\n3.이체\n4.조회\n5.대표계좌 변경");
 		int sel = Bank.scan.nextInt();
 		if (sel == 1) {
 			this.am.deposit(Bank.log);
@@ -47,6 +47,8 @@ public class BankManager {
 			this.am.transfer(Bank.log);
 		} else if (sel == 4) {
 			this.am.pointBoard(Bank.log);
+		} else if (sel == 5) {
+			this.am.repAccount(Bank.log);
 		}
 
 	}

@@ -102,7 +102,10 @@ public class UserManager {
 			System.out.print("name:" + this.users.get(i).getName() + " ");
 			System.out.print("accCnt:" + this.users.get(i).getAccCnt() + " ");
 			for (int j = 0; j < this.users.get(i).getAccCnt(); j++) {
-				System.out.print("accNo:" + this.users.get(i).getAcc().get(j).getAccNum() + ":");
+				System.out.print("accNo:" + this.users.get(i).getAcc().get(j).getAccNum() + " ");
+				if (this.users.get(i).getAcc().get(j).isRep()) {
+					System.out.print("(V)");
+				}
 				System.out.print("accMoney:" + this.users.get(i).getAcc().get(j).getMoney() + " ");
 			}
 			System.out.println();
