@@ -13,7 +13,7 @@ public class AccountManager {
 	}
 
 	public void createAcc(int log) {
-		Random rand = new Random();
+
 		int cnt = um.getUsers().get(log).getAccCnt();
 		if (cnt < 3) {
 
@@ -21,28 +21,34 @@ public class AccountManager {
 			if (cnt == 0) {
 				this.um.getUsers().get(log).getAcc().get(0).setRep(true);
 			}
-			while (true) {
-				this.um.getUsers().get(log).getAcc().get(cnt).setAccNum(rand.nextInt(100) + 1 + "");
-				String num = this.um.getUsers().get(log).getAcc().get(cnt).getAccNum();
-				int check = 0;
-				for (int i = 0; i < this.um.getUsers().size(); i++) {// 계좌번호 중복체크
-					for (int j = 0; j < this.um.getUsers().get(i).getAccCnt(); j++) {
-						if (this.um.getUsers().get(i).getAcc().get(j).getAccNum().equals(num)) {
-							check++;
-						}
-					}
+			randomAccNum(log, cnt);
 
-				}
-				if (check == 0) {
-					um.getUsers().get(log).setAccCnt(um.getUsers().get(log).getAccCnt() + 1);
-					break;
-				}
-			}
 		} else {
 			System.out.println("더이상 생성불가능합니다.");
 		}
 	}
 
+	public void randomAccNum(int log, int cnt) {
+		Random rand = new Random();
+		while (true) {
+			this.um.getUsers().get(log).getAcc().get(cnt).setAccNum(rand.nextInt(100) + 1 + "");
+			String num = this.um.getUsers().get(log).getAcc().get(cnt).getAccNum();
+			int check = 0;
+			for (int i = 0; i < this.um.getUsers().size(); i++) {// 계좌번호 중복체크
+				for (int j = 0; j < this.um.getUsers().get(i).getAccCnt(); j++) {
+					if (this.um.getUsers().get(i).getAcc().get(j).getAccNum().equals(num)) {
+						check++;
+					}
+				}
+
+			}
+			if (check == 0) {
+				um.getUsers().get(log).setAccCnt(um.getUsers().get(log).getAccCnt() + 1);
+				break;
+			}
+		}
+	}
+	
 	public void removeAcc(int log) {
 		if (um.getUsers().get(log).getAccCnt() > 0) {
 			System.out.print("철회할 계좌번호 입력:");
@@ -59,27 +65,52 @@ public class AccountManager {
 					acidx = i;
 				}
 			}
-			if (idx != -1&&idx!=acidx) {
+			if (idx != -1) {
 				if (um.getUsers().get(log).getAcc().get(idx).getMoney() > 0) {
 					System.out.println("계좌에  잔액이 남아있습니다,그럼에도 철회를 원하십니까?(yes:1,no:2");
 					int input2 = Bank.scan.nextInt();
 					if (input2 == 1) {
+						if (idx == acidx) {
+							int idx3 = -1;
+							for (int i = 0; i < this.um.getUsers().get(log).getAccCnt(); i++) {
+								if (!this.um.getUsers().get(log).getAcc().get(i).isRep()) {
+									idx3 = i;
+								}
+							}
+							if (idx3 != -1) {
+								this.um.getUsers().get(log).getAcc().get(idx3).setRep(true);
+							} 
+						}
 						um.getUsers().get(log).getAcc().remove(idx);
 						um.getUsers().get(log).setAccCnt(um.getUsers().get(log).getAccCnt() - 1);
+
 					} else if (input2 == 2) {
 						System.out.println("계좌 철회 취소");
 					}
 				} else {
+					if (idx == acidx) {
+						int idx3 = -1;
+						for (int i = 0; i < this.um.getUsers().get(log).getAccCnt(); i++) {
+							if (!this.um.getUsers().get(log).getAcc().get(i).isRep()) {
+								idx3 = i;
+							}
+						}
+						if (idx3 != -1) {
+							this.um.getUsers().get(log).getAcc().get(idx3).setRep(true);
+						} 
+					}
 					um.getUsers().get(log).getAcc().remove(idx);
 					um.getUsers().get(log).setAccCnt(um.getUsers().get(log).getAccCnt() - 1);
 				}
-
+				
+				
+				
 			} else {
-				System.out.println("잘못된 계좌 번호거나 대표계좌로 설정된계좌입니다 .");
+				System.out.println("잘못된 계좌번호 입니다 .");
 			}
 
 		} else {
-			System.out.println("개좌가 존재하지않습니다.");
+			System.out.println("계좌가 존재하지않습니다.");
 		}
 	}
 
