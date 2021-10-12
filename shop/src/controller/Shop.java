@@ -64,7 +64,20 @@ public class Shop {
 		}
 	}
 
-	public void adminMenu() {
-
+	public void adminMenu() {//관리자 메뉴부터 시작
+		boolean run = true;
+		while (run) {
+			System.out.println("[1.아이템관리] [2.카테고리 관리] [3.장바구니 관리] [4.유저 관리] [0.뒤로가기]");
+			int sel = um.scan.nextInt();
+			if (sel == 1) {
+//				im.basket(log);
+			} else if (sel == 2) {
+//				im.remove(log);
+			} else if (sel == 3) {
+//				im.pur(log);
+			} else if (sel == 0) {
+				run = false;
+			}
+		}
 	}
 }
