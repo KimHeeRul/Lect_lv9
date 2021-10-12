@@ -75,6 +75,7 @@ public class AccountManager {
 							for (int i = 0; i < this.um.getUsers().get(log).getAccCnt(); i++) {
 								if (!this.um.getUsers().get(log).getAcc().get(i).isRep()) {
 									idx3 = i;
+									break;
 								}
 							}
 							if (idx3 != -1) {
@@ -93,6 +94,7 @@ public class AccountManager {
 						for (int i = 0; i < this.um.getUsers().get(log).getAccCnt(); i++) {
 							if (!this.um.getUsers().get(log).getAcc().get(i).isRep()) {
 								idx3 = i;
+								break;
 							}
 						}
 						if (idx3 != -1) {
@@ -102,8 +104,6 @@ public class AccountManager {
 					um.getUsers().get(log).getAcc().remove(idx);
 					um.getUsers().get(log).setAccCnt(um.getUsers().get(log).getAccCnt() - 1);
 				}
-				
-				
 				
 			} else {
 				System.out.println("잘못된 계좌번호 입니다 .");
