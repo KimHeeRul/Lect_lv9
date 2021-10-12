@@ -52,7 +52,6 @@ public class UserManager {
 			for (int i = 0; i < users.size(); i++) {
 				if (users.get(i).getId().equals(id) && users.get(i).getPw().equals(pw)) {
 					this.log = i;
-					System.out.println(log);
 					return i;
 				} else {
 					System.out.println("정보가 정확하지않습니다.");

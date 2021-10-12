@@ -70,9 +70,47 @@ public class ItemManager {
 	public void basket(int log) {
 		for (int i = 0; i < basket.size(); i++) {
 			if (basket.get(i).getId().equals(um.getUsers().get(log).getId())) {
-				System.out.println(basket.toString());
+				basket.get(i).print();
 			}
 		}
+	}
+
+	public void remove(int log) {//나중에  인덱스 삭제 버전도 고려
+		basket(log);
+		System.out.print("장바구니에서 제외할 품목명:");
+		String sel = um.scan.next();
+		int idx = -1;
+		for (int i = 0; i < basket.size(); i++) {
+			if (basket.get(i).getItem().equals(sel)) {
+				idx = i;
+			}
+		}
+		if (idx!=-1) {
+			basket.remove(idx);
+		}else {
+			System.out.println("해당 상품은 존재하지않습니다.");
+		}
+	}
+
+	public void pur(int log) {
+		basket(log);
+		System.out.println("====================");
+		int price = 0;
+		String id=um.getUsers().get(log).getId();
+		for (int i = 0; i < basket.size(); i++) {
+			if (this.basket.get(i).getId().equals(id)) {
+				price += this.items.get(i).getPrice();
+			}
+		}
+		System.out.println("총 가격:" + price);
+		System.out.println("---구입완료-----");
+		for (int i = 0; i < basket.size(); i++) {
+			if (this.basket.get(i).getId().equals(id)) {
+				this.basket.remove(i);
+				i--;
+			}
+		}
+
 	}
 
 }

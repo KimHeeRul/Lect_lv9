@@ -55,9 +55,9 @@ public class Shop {
 			if (sel == 1) {
 				im.basket(log);
 			} else if (sel == 2) {
-//				im.remove(log);
+				im.remove(log);
 			} else if (sel == 3) {
-//				basketmenu();
+				im.pur(log);
 			} else if (sel == 4) {
 				run = false;
 			}
