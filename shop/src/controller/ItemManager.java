@@ -1,6 +1,5 @@
 package controller;
 
-import java.awt.desktop.UserSessionEvent;
 import java.util.ArrayList;
 
 import models.Basket;
@@ -75,7 +74,15 @@ public class ItemManager {
 		}
 	}
 
-	public void remove(int log) {//나중에  인덱스 삭제 버전도 고려
+	public void allBasket() {
+		System.out.println(basket.size());
+		for (int i = 0; i < basket.size(); i++) {
+			basket.get(i).print();
+			System.out.println("s");
+		}
+	}
+
+	public void remove(int log) {// 나중에 인덱스 삭제 버전도 고려
 		basket(log);
 		System.out.print("장바구니에서 제외할 품목명:");
 		String sel = um.scan.next();
@@ -85,9 +92,9 @@ public class ItemManager {
 				idx = i;
 			}
 		}
-		if (idx!=-1) {
+		if (idx != -1) {
 			basket.remove(idx);
-		}else {
+		} else {
 			System.out.println("해당 상품은 존재하지않습니다.");
 		}
 	}
@@ -96,7 +103,7 @@ public class ItemManager {
 		basket(log);
 		System.out.println("====================");
 		int price = 0;
-		String id=um.getUsers().get(log).getId();
+		String id = um.getUsers().get(log).getId();
 		for (int i = 0; i < basket.size(); i++) {
 			if (this.basket.get(i).getId().equals(id)) {
 				price += this.items.get(i).getPrice();
