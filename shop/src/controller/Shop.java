@@ -88,7 +88,7 @@ public class Shop {
 		boolean run = true;
 		while (run) {
 			System.out.println("[1.전체아이템] [2.아이템추가] [3.아이템삭제] [0.뒤로가기]");
-			int sel = um.scan.nextInt();
+			int sel =this. um.scan.nextInt();
 			if (sel == 1) {
 				this.im.allItem();
 			} else if (sel == 2) {

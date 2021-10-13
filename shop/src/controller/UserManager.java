@@ -12,7 +12,6 @@ public class UserManager {
 	private int log = -1;
 	static Scanner scan = new Scanner(System.in);
 	private ItemManager im = ItemManager.instance;
-//	private ItemManager  im = new ItemManager();
 
 	public void join() {
 		System.out.print("ID를 입력해 주세요.");

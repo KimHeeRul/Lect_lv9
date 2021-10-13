@@ -14,15 +14,7 @@ public class ItemManager {
 	private ArrayList<Basket> basket = new ArrayList<>();
 	private UserManager um = UserManager.instance;
 
-	public ArrayList<Basket> getBasket() {
-		return basket;
-
-	}
-
-	public void setBasket(ArrayList<Basket> basket) {
-		this.basket = basket;
-	}
-
+	
 	public ItemManager() {
 		this.category.add("과자");
 		this.category.add("생선");
@@ -286,7 +278,6 @@ public class ItemManager {
 		System.out.println("---구입완료-----");
 		int sales = sale.getSales();
 		this.sale.setSales(sales + price);
-//		String itemSales=sale.getItemSales().get(sale.getItemSales().size());
 
 		for (int i = 0; i < this.basket.size(); i++) {
 			if (this.basket.get(i).getId().equals(id)) {
