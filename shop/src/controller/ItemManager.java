@@ -97,7 +97,7 @@ public class ItemManager {
 		} else {
 			System.out.println(items.get(select).getName());
 			um = UserManager.instance;
-			
+
 			System.out.println(um.getUsers().get(log).getId());
 			this.basket.add(new Basket(um.getUsers().get(log).getId(), items.get(select).getName()));
 		}
@@ -222,6 +222,17 @@ public class ItemManager {
 //------------------------------------------
 //---------------매출  관리자 메뉴--------------
 	public void sales() {
+		System.out.println("==========팔린 상품=============");
+		for (int i = 0; i < items.size(); i++) {
+			int cnt = 0;
+			for (int j = 0; j < sale.getItemSales().size(); j++) {
+				if (items.get(i).getName().equals(sale.getItemSales().get(j))) {
+					cnt++;
+				}
+			}
+			System.out.println(items.get(i).getName() + " :" + cnt + "개");
+		}
+		System.out.println("============================");
 		System.out.println("총 매출:" + sale.getSales());
 	}
 
@@ -260,13 +271,22 @@ public class ItemManager {
 		String id = um.getUsers().get(log).getId();
 		for (int i = 0; i < basket.size(); i++) {
 			if (this.basket.get(i).getId().equals(id)) {
-				price += this.items.get(i).getPrice();
+
+				for (int j = 0; j < items.size(); j++) {
+					if (this.basket.get(i).getItem().equals(this.items.get(j).getName())) {
+						price += this.items.get(j).getPrice();
+						sale.getItemSales().add(this.items.get(j).getName());
+						break;
+					}
+				}
 			}
 		}
 		System.out.println("총 가격:" + price);
 		System.out.println("---구입완료-----");
 		int sales = sale.getSales();
 		sale.setSales(sales + price);
+//		String itemSales=sale.getItemSales().get(sale.getItemSales().size());
+
 		for (int i = 0; i < basket.size(); i++) {
 			if (this.basket.get(i).getId().equals(id)) {
 				this.basket.remove(i);
