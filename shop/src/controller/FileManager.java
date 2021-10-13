@@ -14,19 +14,19 @@ public class FileManager {
 	public void save() {
 		File file = new File("test.txt");
 		this.text = "";
-		this.text += this.um.getUsers().size() + "/";
+		this.text += this.um.getUsers().size() + "/n";
 		for (int i = 0; i < this.um.getUsers().size(); i++) {
 			this.text += this.um.getUsers().get(i).getId() + "/";
 			this.text += this.um.getUsers().get(i).getPw() + "/";
 			this.text += "\n";
 		}
-		this.text += this.im.getBasket().size() + "/";
+		this.text += this.im.getBasket().size() + "/n";
 		for (int i = 0; i < im.getBasket().size(); i++) {
 			this.text += this.im.getBasket().get(i).getId() + "/";
 			this.text += this.im.getBasket().get(i).getItem() + "/";
 			this.text += "\n";
 		}
-		
+		this.text += this.im.getItems().size() + "/n";
 		for (int i = 0; i < im.getItems().size(); i++) {
 			this.text += this.im.getItems().get(i).getName() + "/";
 			this.text += this.im.getItems().get(i).getPrice() + "/";
