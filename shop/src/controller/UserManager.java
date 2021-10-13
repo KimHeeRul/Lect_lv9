@@ -11,22 +11,22 @@ public class UserManager {
 	private ArrayList<User> users = new ArrayList<>();
 	private int log = -1;
 	static Scanner scan = new Scanner(System.in);
-	private ItemManager  im = ItemManager.instance;
+	private ItemManager im = ItemManager.instance;
 //	private ItemManager  im = new ItemManager();
 
 	public void join() {
 		System.out.print("ID를 입력해 주세요.");
 		String id = scan.next();
 		int check = 0;
-		for (int i = 0; i < users.size(); i++) {
-			if (users.get(i).getId().equals(id)) {
+		for (int i = 0; i < this.users.size(); i++) {
+			if (this.users.get(i).getId().equals(id)) {
 				check++;
 			}
 		}
 		if (check == 0) {
 			System.out.print("PW를 입력해주세요.");
 			String pw = scan.next();
-			users.add(new User(id, pw));
+			this.users.add(new User(id, pw));
 		} else {
 			System.out.println("중복된 아이디입니다.");
 		}
@@ -39,9 +39,9 @@ public class UserManager {
 		String pw = scan.next();
 		int check = -1;
 		for (int i = 0; i < users.size(); i++) {
-			if (users.get(i).getId().equals(id) && users.get(i).getPw().equals(pw)) {
-				im.basketRemove(id);
-				users.remove(i);
+			if (this.users.get(i).getId().equals(id) && this.users.get(i).getPw().equals(pw)) {
+				this.im.basketRemove(id);
+				this.users.remove(i);
 				check++;
 			}
 		}
@@ -56,8 +56,8 @@ public class UserManager {
 			String id = scan.next();
 			System.out.print("Pw");
 			String pw = scan.next();
-			for (int i = 0; i < users.size(); i++) {
-				if (users.get(i).getId().equals(id) && users.get(i).getPw().equals(pw)) {
+			for (int i = 0; i < this.users.size(); i++) {
+				if (this.users.get(i).getId().equals(id) && this.users.get(i).getPw().equals(pw)) {
 					this.log = i;
 					return i;
 				}
@@ -80,9 +80,9 @@ public class UserManager {
 
 	// ---------------유저 관리자 메뉴--------------
 	public void allUser() {
-		for (int i = 0; i < users.size(); i++) {
-			String id = users.get(i).getId();
-			String pw = users.get(i).getPw();
+		for (int i = 0; i < this.users.size(); i++) {
+			String id = this.users.get(i).getId();
+			String pw = this.users.get(i).getPw();
 			System.out.println("[ID:" + id + "][PW:" + pw + "]");
 		}
 	}
@@ -100,7 +100,7 @@ public class UserManager {
 	// ------------------------------------------
 
 	public ArrayList<User> getUsers() {
-		return users;
+		return this.users;
 	}
 
 	public void setUsers(ArrayList<User> users) {
