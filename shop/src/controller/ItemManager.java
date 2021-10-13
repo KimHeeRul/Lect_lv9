@@ -198,7 +198,7 @@ public class ItemManager {
 	}
 
 //------------------------------------------
-//---------------매출 관리자 메뉴--------------
+//---------------매출  관리자 메뉴--------------
 	public void sales() {
 		for (int i = 0; i < um.getUsers().size(); i++) {
 			String id2 = um.getUsers().get(i).getId();
