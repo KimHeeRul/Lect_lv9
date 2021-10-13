@@ -49,6 +49,20 @@ public class ItemManager {
 
 	}
 
+	public int cateItem(int sel2, int sel) {
+		int idx = 0;
+		for (int i = 0; i < items.size(); i++) {
+			if (items.get(i).getCategory().equals(category.get(sel))) {
+				if (sel2 == idx) {
+					idx = i;
+					break;
+				}
+				idx++;
+			}
+		}
+		return idx;
+	}
+
 	public void itemShopping(int sel, int log) {
 		int cnt = 1;
 		for (int i = 0; i < items.size(); i++) {
@@ -61,9 +75,10 @@ public class ItemManager {
 		}
 		System.out.println("아이템 번호를 입력하세요");
 		int sel2 = um.scan.nextInt() - 1;
-		System.out.println(items.get(sel2).getName());
+		int select = cateItem(sel2, sel);
+		System.out.println(items.get(select).getName());
 		System.out.println(um.getUsers().get(log).getId());
-		this.basket.add(new Basket(um.getUsers().get(log).getId(), items.get(sel2).getName()));
+		this.basket.add(new Basket(um.getUsers().get(log).getId(), items.get(select).getName()));
 	}
 
 	public void basket(int log) {
@@ -74,13 +89,133 @@ public class ItemManager {
 		}
 	}
 
-	public void allBasket() {
-		System.out.println(basket.size());
-		for (int i = 0; i < basket.size(); i++) {
-			basket.get(i).print();
-			System.out.println("s");
+//-----------------------아이템 관리자 메뉴----------------------------
+	public void allItem() {
+		for (int i = 0; i < items.size(); i++) {
+			items.get(i).print();
 		}
 	}
+
+	public void itemAdd() {
+		System.out.println("---------------");
+		for (int i = 0; i < items.size(); i++) {
+			items.get(i).print();
+		}
+		System.out.println("---------------");
+		System.out.print("추가할 아이템 이름:");
+		String name = um.scan.next();
+		int cate;
+		while (true) {
+			System.out.println("---------------");
+			for (int i = 0; i < category.size(); i++) {
+				System.out.println("[" + (i + 1) + "]" + category.get(i));
+			}
+			System.out.println("---------------");
+			System.out.print("추가할 아이템 카테고리 번호:");
+			cate = um.scan.nextInt() - 1;
+			if (cate >= category.size() && cate < 0) {
+				System.out.println("존재하지않는 카테고리 입니다.");
+				continue;
+			} else {
+				break;
+			}
+		}
+		System.out.print("추가할 아이템 가격:");
+		int price = um.scan.nextInt();
+		items.add(new Item(name, price, category.get(cate)));
+
+	}
+
+	public void itemRemove() {
+		while (true) {
+			System.out.println("---------------");
+			for (int i = 0; i < items.size(); i++) {
+				System.out.print("[" + (i + 1) + "]");
+				items.get(i).print();
+			}
+			System.out.println("---------------");
+			System.out.print("삭제할 아이템 번호:");
+			int num = um.scan.nextInt() - 1;
+			if (num < items.size() && num >= 0) {
+				items.remove(num);
+				break;
+			}
+		}
+	}
+
+//--------------------------------------
+//---------------카테고리 관리자 메뉴--------------
+	public void allCate() {
+		for (int i = 0; i < category.size(); i++) {
+			System.out.println("[" + category.get(i) + "]");
+		}
+	}
+
+	public void cateAdd() {
+		System.out.println("---------------");
+		for (int i = 0; i < category.size(); i++) {
+			System.out.println("[" + (i + 1) + "]" + category.get(i));
+		}
+		System.out.println("---------------");
+		System.out.print("추가할 아이템 카테고리 이름:");
+		String name = um.scan.next();
+		category.add(name);
+	}
+
+	public void cateRemove() {
+		while (true) {
+			System.out.println("---------------");
+			for (int i = 0; i < category.size(); i++) {
+				System.out.print("[" + (i + 1) + "]");
+				System.out.println("[" + (i + 1) + "]" + category.get(i));
+			}
+			System.out.println("---------------");
+			System.out.print("삭제할 카테고리 번호:");
+			int num = um.scan.nextInt() - 1;
+			if (num < category.size() && num >= 0) {
+				category.remove(num);
+				break;
+			}
+		}
+	}
+
+//------------------------------------------
+//---------------장바구니 관리자 메뉴--------------
+	public void allBasket() {
+		for (int i = 0; i < um.getUsers().size(); i++) {
+			String id2 = um.getUsers().get(i).getId();
+			System.out.println("======[" + id2 + "]=======");
+			for (int j = 0; j < basket.size(); j++) {
+				String id = basket.get(j).getId();
+				if (id2.equals(id)) {
+					System.out.println("[" + basket.get(j).getItem() + "]");
+
+				}
+			}
+			System.out.println("====================");
+
+		}
+	}
+
+//------------------------------------------
+//---------------매출 관리자 메뉴--------------
+	public void sales() {
+		for (int i = 0; i < um.getUsers().size(); i++) {
+			String id2 = um.getUsers().get(i).getId();
+			System.out.println("======[" + id2 + "]=======");
+			for (int j = 0; j < basket.size(); j++) {
+				String id = basket.get(j).getId();
+				if (id2.equals(id)) {
+					System.out.println("[" + basket.get(j).getItem() + "]");
+
+				}
+			}
+			System.out.println("====================");
+
+		}
+	}
+	
+//------------------------------------------
 
 	public void remove(int log) {// 나중에 인덱스 삭제 버전도 고려
 		basket(log);

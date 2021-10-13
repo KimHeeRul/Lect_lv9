@@ -21,7 +21,6 @@ public class Shop {
 					this.log = check;
 					loginMenu();
 				}
-				System.out.println("ss");
 			} else if (sel == 100) {
 				adminMenu();
 			} else if (sel == 0) {
@@ -63,21 +62,22 @@ public class Shop {
 			}
 		}
 	}
-//	1.전체아이템] [2.아이템추가] [3.아이템삭제] [0.뒤로가기]
-//	[1.전체카테고리] [2.카테고리추가] [3.카테고리삭제] [0.뒤로가기]
 
-//	[1.전체유저] [2.유저추가] [3.유저삭제] [0.뒤로가기]
 	public void adminMenu() {// 관리자 메뉴부터 시작
 		boolean run = true;
 		while (run) {
-			System.out.println("[1.아이템관리] [2.카테고리 관리] [3.장바구니 관리] [4.유저 관리] [0.뒤로가기]");
+			System.out.println("[1.아이템관리] [2.카테고리 관리] [3.장바구니 관리] [4.유저 관리] [5.매출] [0.뒤로가기]");
 			int sel = um.scan.nextInt();
 			if (sel == 1) {
 				itemSetting();
 			} else if (sel == 2) {
-//				im.remove(log);
+				cateSetting();
 			} else if (sel == 3) {
-//				im.pur(log);
+				basketSetting();
+			} else if (sel == 4) {
+				userSetting();
+			} else if (sel == 5) {
+				im.sales();
 			} else if (sel == 0) {
 				run = false;
 			}
@@ -90,15 +90,66 @@ public class Shop {
 			System.out.println("[1.전체아이템] [2.아이템추가] [3.아이템삭제] [0.뒤로가기]");
 			int sel = um.scan.nextInt();
 			if (sel == 1) {
-				im.allBasket();
+				im.allItem();
 			} else if (sel == 2) {
-				
+				im.itemAdd();
 			} else if (sel == 3) {
-
+				im.itemRemove();
 			} else if (sel == 0) {
 				run = false;
 			}
 
 		}
 	}
+
+	public void cateSetting() {
+		boolean run = true;
+		while (run) {
+			System.out.println("[1.전체카테고리] [2.카테고리추가] [3.카테고리삭제] [0.뒤로가기]");
+			int sel = um.scan.nextInt();
+			if (sel == 1) {
+				im.allCate();
+			} else if (sel == 2) {
+				im.cateAdd();
+			} else if (sel == 3) {
+				im.cateRemove();
+			} else if (sel == 0) {
+				run = false;
+			}
+
+		}
+	}
+
+	public void basketSetting() {
+		boolean run = true;
+		while (run) {
+			System.out.println("[1.장바구니 리스트] [0.뒤로가기]");
+			int sel = um.scan.nextInt();
+			if (sel == 1) {
+				im.allBasket();
+			} else if (sel == 0) {
+				run = false;
+			}
+
+		}
+	}
+
+	public void userSetting() {
+		boolean run = true;
+		while (run) {
+			System.out.println("[1.전체유저] [2.유저추가] [3.유저삭제] [0.뒤로가기]");
+			int sel = um.scan.nextInt();
+			if (sel == 1) {
+				um.allUser();
+			} else if (sel == 2) {
+				um.userAdd();
+			} else if (sel == 3) {
+				um.userRemove();
+			} else if (sel == 0) {
+				run = false;
+			}
+
+		}
+	}
+
 }
