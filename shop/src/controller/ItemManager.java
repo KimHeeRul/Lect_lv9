@@ -4,13 +4,23 @@ import java.util.ArrayList;
 
 import models.Basket;
 import models.Item;
+import models.sale;
 
 public class ItemManager {
-	private UserManager um = UserManager.instance;
+	private sale sale = new sale();
 	public static ItemManager instance = new ItemManager();
 	private ArrayList<Item> items = new ArrayList<>();
 	private ArrayList<String> category = new ArrayList<>();
 	private ArrayList<Basket> basket = new ArrayList<>();
+	private UserManager um = UserManager.instance;
+
+	public ArrayList<Basket> getBasket() {
+		return basket;
+	}
+
+	public void setBasket(ArrayList<Basket> basket) {
+		this.basket = basket;
+	}
 
 	public ItemManager() {
 		category.add("과자");
@@ -51,16 +61,22 @@ public class ItemManager {
 
 	public int cateItem(int sel2, int sel) {
 		int idx = 0;
+		int cnt = -1;
 		for (int i = 0; i < items.size(); i++) {
 			if (items.get(i).getCategory().equals(category.get(sel))) {
 				if (sel2 == idx) {
 					idx = i;
+					cnt++;
 					break;
 				}
 				idx++;
 			}
 		}
-		return idx;
+		if (cnt != -1) {
+			return idx;
+		} else {
+			return -1;
+		}
 	}
 
 	public void itemShopping(int sel, int log) {
@@ -76,9 +92,15 @@ public class ItemManager {
 		System.out.println("아이템 번호를 입력하세요");
 		int sel2 = um.scan.nextInt() - 1;
 		int select = cateItem(sel2, sel);
-		System.out.println(items.get(select).getName());
-		System.out.println(um.getUsers().get(log).getId());
-		this.basket.add(new Basket(um.getUsers().get(log).getId(), items.get(select).getName()));
+		if (select == -1) {
+			System.out.println("잘못된 번호입니다.");
+		} else {
+			System.out.println(items.get(select).getName());
+			um = UserManager.instance;
+			
+			System.out.println(um.getUsers().get(log).getId());
+			this.basket.add(new Basket(um.getUsers().get(log).getId(), items.get(select).getName()));
+		}
 	}
 
 	public void basket(int log) {
@@ -200,21 +222,9 @@ public class ItemManager {
 //------------------------------------------
 //---------------매출  관리자 메뉴--------------
 	public void sales() {
-		for (int i = 0; i < um.getUsers().size(); i++) {
-			String id2 = um.getUsers().get(i).getId();
-			System.out.println("======[" + id2 + "]=======");
-			for (int j = 0; j < basket.size(); j++) {
-				String id = basket.get(j).getId();
-				if (id2.equals(id)) {
-					System.out.println("[" + basket.get(j).getItem() + "]");
-
-				}
-			}
-			System.out.println("====================");
-
-		}
+		System.out.println("총 매출:" + sale.getSales());
 	}
-	
+
 //------------------------------------------
 
 	public void remove(int log) {// 나중에 인덱스 삭제 버전도 고려
@@ -234,6 +244,15 @@ public class ItemManager {
 		}
 	}
 
+	public void basketRemove(String id) {
+		for (int i = 0; i < basket.size(); i++) {
+			if (basket.get(i).getId().equals(id)) {
+				basket.remove(i);
+				i--;
+			}
+		}
+	}
+
 	public void pur(int log) {
 		basket(log);
 		System.out.println("====================");
@@ -246,6 +265,8 @@ public class ItemManager {
 		}
 		System.out.println("총 가격:" + price);
 		System.out.println("---구입완료-----");
+		int sales = sale.getSales();
+		sale.setSales(sales + price);
 		for (int i = 0; i < basket.size(); i++) {
 			if (this.basket.get(i).getId().equals(id)) {
 				this.basket.remove(i);

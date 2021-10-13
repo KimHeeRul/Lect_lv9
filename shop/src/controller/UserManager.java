@@ -3,13 +3,16 @@ package controller;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import models.Basket;
 import models.User;
 
 public class UserManager {
-	Scanner scan = new Scanner(System.in);
 	public static UserManager instance = new UserManager();
 	private ArrayList<User> users = new ArrayList<>();
 	private int log = -1;
+	static Scanner scan = new Scanner(System.in);
+	private ItemManager  im = ItemManager.instance;
+//	private ItemManager  im = new ItemManager();
 
 	public void join() {
 		System.out.print("ID를 입력해 주세요.");
@@ -37,6 +40,7 @@ public class UserManager {
 		int check = -1;
 		for (int i = 0; i < users.size(); i++) {
 			if (users.get(i).getId().equals(id) && users.get(i).getPw().equals(pw)) {
+				im.basketRemove(id);
 				users.remove(i);
 				check++;
 			}
