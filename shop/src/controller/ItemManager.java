@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import models.Basket;
 import models.Item;
-import models.User;
 import models.sale;
 
 public class ItemManager {
@@ -14,6 +13,23 @@ public class ItemManager {
 	private ArrayList<String> category = new ArrayList<>();
 	private ArrayList<Basket> basket = new ArrayList<>();
 	private UserManager um = UserManager.instance;
+
+	public ArrayList<Basket> getBasket() {
+		return basket;
+	}
+
+	public void setBasket(ArrayList<Basket> basket) {
+		this.basket = basket;
+	}
+
+	
+	public ArrayList<Item> getItems() {
+		return items;
+	}
+
+	public void setItems(ArrayList<Item> items) {
+		this.items = items;
+	}
 
 	public ItemManager() {
 		this.category.add("과자");
@@ -49,7 +65,6 @@ public class ItemManager {
 			}
 
 		}
-
 	}
 
 	public int cateItem(int sel2, int sel) {
@@ -91,7 +106,7 @@ public class ItemManager {
 		if (select == -1) {
 			System.out.println("잘못된 번호입니다.");
 		} else {
-//			this.um = UserManager.instance;
+			this.um = UserManager.instance;
 			System.out.println(items.get(select).getName());
 			System.out.println(um.getUsers().get(log).getId());
 			this.basket.add(new Basket(this.um.getUsers().get(log).getId(), this.items.get(select).getName()));
