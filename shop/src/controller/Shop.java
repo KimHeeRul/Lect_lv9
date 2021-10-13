@@ -2,8 +2,8 @@ package controller;
 
 public class Shop {
 
-	private UserManager um = UserManager.instance;
 	private ItemManager im = ItemManager.instance;
+	private UserManager um = UserManager.instance;
 	private int log = -1;
 
 	public void menu() {
