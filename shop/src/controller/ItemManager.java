@@ -30,6 +30,15 @@ public class ItemManager {
 	public void setItems(ArrayList<Item> items) {
 		this.items = items;
 	}
+	
+
+	public sale getSale() {
+		return sale;
+	}
+
+	public void setSale(sale sale) {
+		this.sale = sale;
+	}
 
 	public ItemManager() {
 		this.category.add("°úÀÚ");

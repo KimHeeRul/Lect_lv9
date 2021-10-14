@@ -163,7 +163,7 @@ public class Shop {
 				fm.save();
 				
 			} else if (sel == 2) {
-				this.um.userAdd();
+				fm.load();
 			} else if (sel == 0) {
 				run = false;
 			}

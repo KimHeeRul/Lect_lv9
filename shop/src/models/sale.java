@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class sale {
 	private int sales;
 	private ArrayList<String> itemSales = new ArrayList<>();
-	
+
 	public ArrayList<String> getItemSales() {
 		return itemSales;
 	}
@@ -21,5 +21,5 @@ public class sale {
 	public void setSales(int sales) {
 		this.sales = sales;
 	}
-	
+
 }
