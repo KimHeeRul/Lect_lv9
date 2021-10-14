@@ -2,10 +2,11 @@ package models;
 
 public class Player {
 	static int money;
-	static Guild guild =new Guild();
-	
+	static Guild guild = new Guild();
+
 	public Player() {
-		this.money=100000;
+		this.money = 100000;
+		guild.setting();
 	}
-	
+
 }
