@@ -1,13 +1,17 @@
 import java.util.Scanner;
 
-import models.Guild;
+import controller.Guild;
+import controller.Inven;
+import controller.Shop;
 import models.Player;
 
 public class menu {
 	static Scanner scan = new Scanner(System.in);
-	Guild guild = new Guild();
-
+	private Guild guild = Guild.guild;
+	Shop shop = new Shop();
 	Player player = new Player();
+	Inven inven =new Inven();
+	
 	public menu() {
 		while (true) {
 			System.out.println("=============== [메인메뉴] ================");
@@ -18,9 +22,9 @@ public class menu {
 			if (sel == 1) {
 				guildMenu();
 			} else if (sel == 2) {
-				shop();
+				shop.shopMenu();
 			} else if (sel == 3) {
-//				player.inventoryMenu();
+				inventMenu();
 			} else if (sel == 4) {
 			} else if (sel == 5) {
 			} else {
@@ -44,14 +48,29 @@ public class menu {
 			} else if (sel == 3) {
 				guild.removeColleague();
 			} else if (sel == 4) {
+				guild.change();
 			} else if (sel == 5) {
+				guild.sort();
 			} else {
 				break;
 			}
 		}
 	}
 
-	public void shop() {
-
+	public void inventMenu() {
+		while (true) {
+			System.out.println("=============== [인벤 메뉴] ================");
+			System.out.println("[1.착용] [2.판매] [0.뒤로가기]");
+			System.out.print(">>>");
+			int sel = scan.nextInt();
+			if (sel == 1) {
+				inven.equip();
+			} else if (sel == 2) {
+				guild.addColleague();
+			} else {
+				break;
+			}
+		}
 	}
+
 }
