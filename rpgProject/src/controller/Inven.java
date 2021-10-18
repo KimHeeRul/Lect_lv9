@@ -106,7 +106,7 @@ public class Inven {
 		printItemList();
 		System.out.print("판매할 아이템 번호:");
 		int sel=scan.nextInt()-1;
-		Player.money+=itemList.get(sel).getPrice();
+		Player.money+=(itemList.get(sel).getPrice()*0.5);
 		itemList.remove(sel);
 		
 	}
