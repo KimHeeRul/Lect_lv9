@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import models.Item;
+import models.Player;
 
 public class Inven {
 	private Guild guild = Guild.guild;
@@ -100,5 +101,13 @@ public class Inven {
 		if (ring != null) {
 			itemList.add(ring);
 		}
+	}
+	public void sell() {
+		printItemList();
+		System.out.print("판매할 아이템 번호:");
+		int sel=scan.nextInt()-1;
+		Player.money+=itemList.get(sel).getPrice();
+		itemList.remove(sel);
+		
 	}
 }

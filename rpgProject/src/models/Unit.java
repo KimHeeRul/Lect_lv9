@@ -4,7 +4,7 @@ public class Unit {
 	private String name;
 	private int level;
 	private int hp;
-	private int maxHp = this.hp;
+	private int maxHp;
 	private int att;
 	private int def;
 	private int exp;
@@ -22,6 +22,20 @@ public class Unit {
 		this.def = def;
 		this.exp = exp;
 		this.party = false;
+		this.weapon = null;
+		this.armor = null;
+		this.ring = null;
+	}
+
+	public Unit(String name, int level,  int hp,int Maxhp, int att, int def, int exp, boolean party) {// 캐릭터 생성
+		this.name = name;
+		this.level = level;
+		this.maxHp = Maxhp;
+		this.hp = hp;
+		this.att = att;
+		this.def = def;
+		this.exp = exp;
+		this.party = party;
 		this.weapon = null;
 		this.armor = null;
 		this.ring = null;

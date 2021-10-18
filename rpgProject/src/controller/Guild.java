@@ -10,10 +10,9 @@ import models.Unit;
 
 public class Guild {
 	final int partySize = 4;// 파티인원수 고정
-	static ArrayList<Unit> guildList = new ArrayList<Unit>();
+	 static ArrayList<Unit> guildList = new ArrayList<Unit>();
 	Scanner scan = new Scanner(System.in);
 	public static Guild guild = new Guild();
-	
 
 	public void setting() {
 		guildList.add(new Unit("호랑이", 1, 100, 10, 5, 0));
@@ -55,24 +54,22 @@ public class Guild {
 		System.out.print("[공격력:" + guildList.get(i).getAtt() + "]\t");
 		System.out.print("[방어력:" + guildList.get(i).getDef() + "]\t");
 		System.out.println("[파티중:" + guildList.get(i).isParty() + "]\t");
-		if (guildList.get(i).getWeapon()==null) {
+		if (guildList.get(i).getWeapon() == null) {
 			System.out.print("[무기 : 없음 ]\t");
-		}else {
+		} else {
 			System.out.print("[무기:" + guildList.get(i).getWeapon().getName() + "]\t");
 		}
-		if (guildList.get(i).getArmor()==null) {
+		if (guildList.get(i).getArmor() == null) {
 			System.out.print("[방어구 : 없음 ]\t");
-		}else {
+		} else {
 			System.out.print("[방어구:" + guildList.get(i).getArmor().getName() + "]\t");
 		}
-		if (guildList.get(i).getRing()==null) {
+		if (guildList.get(i).getRing() == null) {
 			System.out.println("[반지 : 없음 ]\t");
-		}else {
+		} else {
 			System.out.println("[반지:" + guildList.get(i).getRing().getName() + "]\t");
 		}
-		
-		
-		
+
 	}
 
 	public void addColleague() {
@@ -111,31 +108,30 @@ public class Guild {
 		System.out.print("방출할 길드원 번호:");
 		int sel = scan.nextInt() - 1;
 		// 여기서부터
-		//파티중인멤버 확인
+		// 파티중인멤버 확인
 		if (!guildList.get(sel).isParty()) {
 			System.out.println("=================");
 			System.out.println("[이름:" + guildList.get(sel).getName() + "]길드원을 방출 합니다.");
 			System.out.println("=================");
-			//여기서부터 해서 방출시 가진아이템 인벤토리에 전부 넣기
+			// 여기서부터 해서 방출시 가진아이템 인벤토리에 전부 넣기
 			Player.inven.recoveryItem(sel);
-			guildList.remove(sel);			
+			guildList.remove(sel);
 		} else {
 			System.out.println("파티중인 멤버입니다 방출하시겠습니까?(1-yes/2-no)");
-			int sel2=scan.nextInt();
-			if (sel2==1) {
+			int sel2 = scan.nextInt();
+			if (sel2 == 1) {
 				Player.inven.recoveryItem(sel);
 				guildList.remove(sel);
-				for (int i = 0; i < guildList.size(); i++) {//차순위 에게 파티 넘기기
-					if (guildList.get(i).isParty()==false) {
+				for (int i = 0; i < guildList.size(); i++) {// 차순위 에게 파티 넘기기
+					if (guildList.get(i).isParty() == false) {
 						guildList.get(i).setParty(true);
 						break;
 					}
 				}
-			}else if (sel2==2) {
+			} else if (sel2 == 2) {
 				System.out.println("[방출 취소]");
 			}
-			
-			
+
 		}
 	}
 

@@ -3,6 +3,7 @@ import java.util.Scanner;
 import controller.Guild;
 import controller.Inven;
 import controller.Shop;
+import controller.fileManager;
 import models.Player;
 
 public class menu {
@@ -10,6 +11,7 @@ public class menu {
 	private Guild guild = Guild.guild;
 	Shop shop = new Shop();
 	Player player = new Player();
+	private fileManager fm=new fileManager();
 	Inven inven =new Inven();
 	
 	public menu() {
@@ -26,7 +28,9 @@ public class menu {
 			} else if (sel == 3) {
 				inventMenu();
 			} else if (sel == 4) {
+				fm.save();
 			} else if (sel == 5) {
+				fm.load();
 			} else {
 				System.out.println("게임을 종료 합니다.");
 				break;
@@ -66,7 +70,7 @@ public class menu {
 			if (sel == 1) {
 				inven.equip();
 			} else if (sel == 2) {
-				guild.addColleague();
+				inven.sell();
 			} else {
 				break;
 			}

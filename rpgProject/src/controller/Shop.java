@@ -8,10 +8,15 @@ import models.Player;
 
 public class Shop {
 	Scanner scan = new Scanner(System.in);
-
-	static ArrayList<Item> items = new ArrayList<>();
+	public static ArrayList<Item> items = new ArrayList<>();
 
 	public Shop() {
+		if (this.items.size()==0) {
+			init();
+		}
+	}
+
+	public void init() {
 		items.add(new Item(Item.Weapon, "나무검", 3, 1000));
 		items.add(new Item(Item.Weapon, "철검", 5, 2000));
 		items.add(new Item(Item.Weapon, "레이피어", 7, 2500));
@@ -24,7 +29,6 @@ public class Shop {
 		items.add(new Item(Item.Ring, "금반지", 17, 6000));
 		items.add(new Item(Item.Ring, "다이아반지", 35, 20000));
 	}
-
 	public void shopMenu() {
 		while (true) {
 			System.out.println("=============== [상 점] ================");
