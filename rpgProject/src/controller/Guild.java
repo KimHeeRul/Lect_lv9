@@ -111,16 +111,31 @@ public class Guild {
 		System.out.print("방출할 길드원 번호:");
 		int sel = scan.nextInt() - 1;
 		// 여기서부터
+		//파티중인멤버 확인
 		if (!guildList.get(sel).isParty()) {
 			System.out.println("=================");
 			System.out.println("[이름:" + guildList.get(sel).getName() + "]길드원을 방출 합니다.");
 			System.out.println("=================");
 			//여기서부터 해서 방출시 가진아이템 인벤토리에 전부 넣기
 			Player.inven.recoveryItem(sel);
-			guildList.remove(sel);
-			
+			guildList.remove(sel);			
 		} else {
-			System.out.println("파티중인 멤버는 방출이 불가능합니다.");
+			System.out.println("파티중인 멤버입니다 방출하시겠습니까?(1-yes/2-no)");
+			int sel2=scan.nextInt();
+			if (sel2==1) {
+				Player.inven.recoveryItem(sel);
+				guildList.remove(sel);
+				for (int i = 0; i < guildList.size(); i++) {//차순위 에게 파티 넘기기
+					if (guildList.get(i).isParty()==false) {
+						guildList.get(i).setParty(true);
+						break;
+					}
+				}
+			}else if (sel2==2) {
+				System.out.println("[방출 취소]");
+			}
+			
+			
 		}
 	}
 
