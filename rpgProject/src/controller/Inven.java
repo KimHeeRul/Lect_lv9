@@ -78,7 +78,7 @@ public class Inven {
 	}
 
 	public void printItemList() {
-		System.out.println("=====아이템 리스트===s=======");
+		System.out.println("=====아이템 리스트==========");
 		for (int i = 0; i < itemList.size(); i++) {
 			System.out.print("[" + (i + 1) + "]번\t");
 			System.out.print("[이름 : " + itemList.get(i).getName() + "]\t");
@@ -106,8 +106,9 @@ public class Inven {
 		printItemList();
 		System.out.print("판매할 아이템 번호:");
 		int sel=scan.nextInt()-1;
-		Player.money+=(itemList.get(sel).getPrice()*0.5);
-		itemList.remove(sel);
-		
+		if (sel>=0&&itemList.size()>sel) {
+			Player.money+=(itemList.get(sel).getPrice()*0.5);
+			itemList.remove(sel);
+		}
 	}
 }

@@ -1,4 +1,4 @@
-98000/
+100000/
 호랑이/1/100/100/10/5/0/true/null/null/null/
 강아지/1/80/80/7/3/0/true/null/null/null/
 사슴/1/50/50/3/1/0/true/null/null/null/

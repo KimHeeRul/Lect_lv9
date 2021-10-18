@@ -10,7 +10,7 @@ import models.Unit;
 
 public class Guild {
 	final int partySize = 4;// 파티인원수 고정
-	 static ArrayList<Unit> guildList = new ArrayList<Unit>();
+	static ArrayList<Unit> guildList = new ArrayList<Unit>();
 	Scanner scan = new Scanner(System.in);
 	public static Guild guild = new Guild();
 
@@ -97,6 +97,19 @@ public class Guild {
 			System.out.println("길드원을 추가합니다.");
 			System.out.println("=====================================");
 			Player.money -= 5000;
+			int check = 0;
+			for (int i = 0; i < guildList.size(); i++) {
+				if (guildList.get(i).isParty()) {
+					check++;
+				}
+			}
+			if (check < 4) {
+				for (int i = 0; i < guildList.size(); i++) {
+					if (!guildList.get(i).isParty()) {
+						guildList.get(i).setParty(true);
+					}
+				}
+			}
 		} else {
 			System.out.println("소지한 골드가 부족합니다.");
 		}
