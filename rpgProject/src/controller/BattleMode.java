@@ -94,9 +94,9 @@ public class BattleMode {
 	public void mobatk(monster mob) {
 		System.out.println("=====[" + mob.getName() + "]의 공격!======");
 		int num = ran.nextInt(party.length);
-		int hp = party[num].getHp() - mob.getAtk();
+		int hp = party[num].getHp() - (mob.getAtk()-party[num].getDef()*2);
 		party[num].setHp(hp);
-		System.out.println("[" + party[num].getName() + "이(가) " + mob.getAtk() + "의 피해를 입었습니다.]");
+		System.out.println("[" + party[num].getName() + "이(가) " + (mob.getAtk()-party[num].getDef()*2) + "의 피해를 입었습니다.]");
 		healthCheck(num);
 	}
 
