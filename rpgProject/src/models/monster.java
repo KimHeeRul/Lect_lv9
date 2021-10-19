@@ -10,8 +10,8 @@ public class monster {
 	Random rand = new Random();
 
 	public monster() {
-		this.hp = rand.nextInt(30) + 20;
-		this.atk = rand.nextInt(5) + 3;
+		this.hp = rand.nextInt(50) + 20;
+		this.atk = rand.nextInt(10) + 4;
 	}
 
 	public String getName() {

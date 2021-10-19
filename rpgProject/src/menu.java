@@ -11,9 +11,9 @@ public class menu {
 	static Scanner scan = new Scanner(System.in);
 	private Guild guild = Guild.guild;
 	Shop shop = new Shop();
-	BattleMode bt=new BattleMode();
 	Player player = new Player();
 	private fileManager fm = new fileManager();
+	private BattleMode bt = BattleMode.bt;
 	Inven inven = new Inven();
 
 	public menu() {

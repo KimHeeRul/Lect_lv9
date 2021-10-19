@@ -12,6 +12,7 @@ public class Unit {
 	Item weapon;
 	Item armor;
 	Item ring;
+	private boolean life=true;
 
 	public Unit(String name, int level, int Maxhp, int att, int def, int exp) {// 캐릭터 생성
 		this.name = name;
@@ -42,8 +43,18 @@ public class Unit {
 	}
 
 	// 게터 세터
+	
+	
 	public String getName() {
 		return name;
+	}
+
+	public boolean isLife() {
+		return life;
+	}
+
+	public void setLife(boolean life) {
+		this.life = life;
 	}
 
 	public void setName(String name) {
