@@ -11,7 +11,7 @@ public class monster {
 
 	public monster() {
 		this.hp = rand.nextInt(50) + 20;
-		this.atk = rand.nextInt(1000) + 4;
+		this.atk = rand.nextInt(30) + 10;
 		this.name = name();
 	}
 

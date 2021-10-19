@@ -20,7 +20,6 @@ public class BattleMode {
 			if (guild.guildList.get(i).isParty()) {
 				party[cnt] = guild.guildList.get(i);
 				cnt++;
-				System.out.println("ssds");
 			}
 
 		}
@@ -57,7 +56,7 @@ public class BattleMode {
 		}
 		int money = ran.nextInt(900) + 100;
 		Player.money += money;
-		System.out.println("=====°ñµå " + money + "È¹µæ!=======");
+		System.out.println("=====°ñµå " + money + "G È¹µæ!=======");
 		System.out.println();
 		level();
 

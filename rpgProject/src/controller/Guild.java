@@ -21,7 +21,6 @@ public class Guild {
 		guildList.add(new Unit("두더지", 1, 70, 5, 2, 0));
 		guildList.add(new Unit("돼지", 1, 200, 4, 8, 0));
 		guildList.add(new Unit("사자", 1, 120, 11, 7, 0));
-		System.out.println(guildList.size());
 
 		for (int i = 0; i < partySize; i++) {// 파티4명추가
 			guildList.get(i).setParty(true);
