@@ -6,8 +6,8 @@ import java.util.Scanner;
 import models.Item;
 import models.Player;
 
-public class Inven {
-	private Guild guild = Guild.guild;
+public class Inven extends Guild{
+//	private Guild guild = Guild.guild;
 	public static ArrayList<Item> itemList = new ArrayList<>();
 	Scanner scan = new Scanner(System.in);
 

@@ -8,10 +8,10 @@ import java.util.Scanner;
 import models.Player;
 import models.Unit;
 
-public class Guild {
+public class Guild  {
 	public static Guild guild = new Guild();
 	final int partySize = 4;// 파티인원수 고정
-	static ArrayList<Unit> guildList = new ArrayList<Unit>();
+	public static ArrayList<Unit> guildList = new ArrayList<Unit>();
 	Scanner scan = new Scanner(System.in);
 
 	public void setting() {

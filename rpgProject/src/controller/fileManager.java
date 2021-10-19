@@ -26,7 +26,7 @@ public class fileManager {
 	// 돈
 	// 인벤토리
 	// 길드리스트
-
+	
 	public void save() {
 		String data = GuildData();
 		try {
@@ -60,14 +60,14 @@ public class fileManager {
 			String data = br.readLine();
 			int cnt = 0;
 			while (data != null) {
-				text += data+"\n";
+				text += data + "\n";
 				data = br.readLine();
 			}
 			fr.close();
 			br.close();
 			String temp3[] = text.split("\n");
-			String[] money=temp3[0].split("/");
-			Player.money=Integer.parseInt(money[0]);
+			String[] money = temp3[0].split("/");
+			Player.money = Integer.parseInt(money[0]);
 			for (int i = 1; i < temp3.length; i++) {
 				String[] temp = temp3[i].split("/");
 				String name = temp[0];
@@ -78,7 +78,7 @@ public class fileManager {
 				int def = Integer.parseInt(temp[5]);
 				int exp = Integer.parseInt(temp[6]);
 				boolean party = Boolean.parseBoolean(temp[7]);
-				guild.guildList.add(new Unit(name, level,hp, Maxhp, att, def, exp, party));
+				guild.guildList.add(new Unit(name, level, hp, Maxhp, att, def, exp, party));
 				if (!temp[8].equals(null)) {
 					weapon(temp[8], cnt);
 				}
@@ -88,10 +88,10 @@ public class fileManager {
 				if (!temp[10].equals(null)) {
 					ring(temp[10], cnt);
 				}
-				
+
 				cnt++;
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

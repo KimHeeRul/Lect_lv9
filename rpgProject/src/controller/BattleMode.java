@@ -68,6 +68,7 @@ public class BattleMode {
 				party[i].setExp(party[i].getExp() - (party[i].getLevel() * 10));
 				party[i].setLevel(party[i].getLevel() + 1);
 				party[i].setMaxHp(party[i].getMaxHp() + (party[i].getMaxHp() / 10));
+				party[i].setHp(party[i].getMaxHp());
 				System.out.println(party[i].getName() + "은(는) 레벨이 올랐다!");
 				i--;
 			}

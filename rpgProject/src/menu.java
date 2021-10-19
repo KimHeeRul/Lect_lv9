@@ -7,9 +7,9 @@ import controller.Shop;
 import controller.fileManager;
 import models.Player;
 
-public class menu {
+public class menu extends Guild{
 	static Scanner scan = new Scanner(System.in);
-	private Guild guild = Guild.guild;
+//	private Guild guild = Guild.guild;
 	Shop shop = new Shop();
 	Player player = new Player();
 	private fileManager fm = new fileManager();
