@@ -9,10 +9,10 @@ import models.Player;
 import models.Unit;
 
 public class Guild {
+	public static Guild guild = new Guild();
 	final int partySize = 4;// 파티인원수 고정
 	static ArrayList<Unit> guildList = new ArrayList<Unit>();
 	Scanner scan = new Scanner(System.in);
-	public static Guild guild = new Guild();
 
 	public void setting() {
 		guildList.add(new Unit("호랑이", 1, 100, 10, 5, 0));
@@ -27,6 +27,14 @@ public class Guild {
 			guildList.get(i).setParty(true);
 		}
 
+	}
+
+	public static ArrayList<Unit> getGuildList() {
+		return guildList;
+	}
+
+	public static void setGuildList(ArrayList<Unit> guildList) {
+		Guild.guildList = guildList;
 	}
 
 	public void Glist() {

@@ -1,10 +1,7 @@
 package controller;
 
-import java.io.Console;
 import java.util.Random;
 import java.util.Scanner;
-
-import javax.management.monitor.Monitor;
 
 import models.Player;
 import models.Unit;
@@ -12,9 +9,9 @@ import models.monster;
 
 public class BattleMode {
 	Scanner scan = new Scanner(System.in);
+//	ArrayList<Unit> party=new ArrayList<Unit>()
 	Unit party[] = new Unit[4];
 	private Guild guild = Guild.guild;
-	public static BattleMode bt = new BattleMode();
 	private Random ran = new Random();
 
 	public BattleMode() {// 여기서 길드 리스트 안불러짐//여기서 스타트
@@ -23,6 +20,7 @@ public class BattleMode {
 			if (guild.guildList.get(i).isParty()) {
 				party[cnt] = guild.guildList.get(i);
 				cnt++;
+				System.out.println("ssds");
 			}
 
 		}
@@ -37,6 +35,9 @@ public class BattleMode {
 			if (mob.getHp() > 0) {
 				mobstat(mob);
 				mobatk(mob);
+				if (party.length == 0) {
+					break;
+				}
 			} else {
 				clear(mob);
 				break;
@@ -52,7 +53,7 @@ public class BattleMode {
 			int exp = party[i].getExp();
 			int expPlus = mob.getAtk();
 			party[i].setExp(exp + expPlus);
-			System.out.println("----" + party[i].getName() + expPlus + "EXP 획득!---------");
+			System.out.println("----" + party[i].getName() +" "+ expPlus + " EXP 획득!---------");
 		}
 		int money = ran.nextInt(900) + 100;
 		Player.money += money;
@@ -60,6 +61,23 @@ public class BattleMode {
 		System.out.println();
 		level();
 
+	}
+
+	public void level() {
+		for (int i = 0; i < party.length; i++) {
+			if (party[i].getExp() >= (party[i].getLevel() * 10)) {
+				party[i].setExp(party[i].getExp() - (party[i].getLevel() * 10));
+				party[i].setLevel(party[i].getLevel() + 1);
+				party[i].setMaxHp(party[i].getMaxHp() + (party[i].getMaxHp() / 10));
+				System.out.println(party[i].getName() + "은(는) 레벨이 올랐다!");
+				i--;
+			}
+
+		}
+
+	}
+
+	public void death() {
 		for (int i = 0; i < party.length; i++) {
 			if (!party[i].isLife()) {
 				Player.inven.recoveryItem(i);
@@ -72,25 +90,11 @@ public class BattleMode {
 				}
 			}
 		}
-
-	}
-
-	public void level() {
-		for (int i = 0; i < party.length; i++) {
-			if (party[i].getExp() >= (party[i].getLevel() * 10)) {
-				party[i].setExp(party[i].getExp() - (party[i].getLevel() * 10));
-				party[i].setLevel(party[i].getLevel() + 1);
-				party[i].setMaxHp(party[i].getMaxHp() + (party[i].getMaxHp() / 5));
-				System.out.println(party[i].getName() + "은(는) 레벨이 올랐다!");
-			}
-
-		}
-
 	}
 
 	public void mobatk(monster mob) {
 		System.out.println("=====[" + mob.getName() + "]의 공격!======");
-		int num = ran.nextInt(4);
+		int num = ran.nextInt(party.length);
 		int hp = party[num].getHp() - mob.getAtk();
 		party[num].setHp(hp);
 		System.out.println("[" + party[num].getName() + "이(가) " + mob.getAtk() + "의 피해를 입었습니다.]");
@@ -101,7 +105,29 @@ public class BattleMode {
 		if (party[i].getHp() <= 0) {
 			System.out.println(party[i].getName() + "이 사망했습니다.");
 			party[i].setLife(false);
+			death();
+			
+			
+			Unit temp[] = new Unit[party.length - 1];
+			int cnt = 0;
+			for (int j = 0; j < party.length; j++) {
+				if (party[j].isLife()) {
+					temp[cnt] = party[j];
+					cnt++;
+				}
+			}
+			this.party = new Unit[temp.length];
+			for (int j = 0; j < temp.length; j++) {
+				party[j] = temp[j];
+			}
+			System.out.println(party.length);
+			if (party.length == 0) {
+				System.out.println("전멸");
+				death();
+			}
+
 		}
+
 	}
 
 	public void mobstat(monster mob) {

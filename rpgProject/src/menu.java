@@ -13,7 +13,6 @@ public class menu {
 	Shop shop = new Shop();
 	Player player = new Player();
 	private fileManager fm = new fileManager();
-	private BattleMode bt = BattleMode.bt;
 	Inven inven = new Inven();
 
 	public menu() {
@@ -34,7 +33,18 @@ public class menu {
 			} else if (sel == 5) {
 				fm.load();
 			} else if (sel == 6) {
-				bt.battle();
+				int cnt = 0;
+				for (int i = 0; i < guild.getGuildList().size(); i++) {
+					if (guild.getGuildList().get(i).isParty()) {
+						cnt++;
+					}
+				}
+				if (cnt == 4) {
+					 BattleMode bt = new BattleMode();
+					bt.battle();
+				} else {
+					System.out.println("4인 미만 파티는 전투를 할수없습니다. 파티원을 모아서 다시 도전하세요");
+				}
 			} else {
 				System.out.println("게임을 종료 합니다.");
 				break;
