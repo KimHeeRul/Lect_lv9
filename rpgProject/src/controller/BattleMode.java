@@ -7,11 +7,11 @@ import models.Player;
 import models.Unit;
 import models.monster;
 
-public class BattleMode {
+public class BattleMode extends  Guild {
 	Scanner scan = new Scanner(System.in);
 //	ArrayList<Unit> party=new ArrayList<Unit>()
 	Unit party[] = new Unit[4];
-	private Guild guild = Guild.guild;
+//	private Guild guild = Guild.guild;
 	private Random ran = new Random();
 
 	public BattleMode() {// 여기서 길드 리스트 안불러짐//여기서 스타트
