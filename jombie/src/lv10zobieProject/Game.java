@@ -64,7 +64,7 @@ public class Game {
 			System.out.printf("1.공격 2.물약(%d개남음)", hero.potion());
 			int sel = scan.nextInt();
 			if (sel == 1) {
-				hero.att(enemy);// 공격
+				hero.attk(enemy);// 공격
 			} else if (sel == 2) {
 				hero.drink();
 			}
@@ -73,7 +73,8 @@ public class Game {
 				break;
 			}
 			System.out.println();
-			enemy.att(hero);// 공격
+			
+			enemy.attk(hero);// 공격
 			System.out.println();
 			if (dieCheck(enemy) == true) {// 용사 다이체크
 				check = 2;
@@ -95,7 +96,12 @@ public class Game {
 		System.out.println("====모험시작=====");
 		init();
 		int action = 1;
-		while (hero.getPos() != 12) {// 조건 pos가 12이상일때 생존성공
+		while (true) {// 조건 pos가 12이상일때 생존성공
+			if (hero.getPos() >= 12) {
+				System.out.println("생존에 성공했다!!");
+				break;
+			}
+			
 			map(action);
 			int sel = scan.nextInt();
 			if (sel == 1) {
@@ -130,7 +136,6 @@ public class Game {
 			}
 
 		}
-		System.out.println("생존에 성공했다!!");
 
 	}
 }
