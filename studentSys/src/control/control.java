@@ -2,8 +2,6 @@ package control;
 
 import java.util.Scanner;
 
-import model.student;
-
 public class control {
 
 	private static control instance = new control();
@@ -15,7 +13,19 @@ public class control {
 
 	Scanner scan = new Scanner(System.in);
 
+	public void print() {
+		for (int i = 0; i < regi.student.size(); i++) {
+			System.out.print("학생명:" + regi.student.get(i).getName() + " ");
+			for (int j = 0; j < regi.student.get(i).getSubject().size(); j++) {
+				System.out.print("과목명:" + regi.student.get(i).getSubject().get(j).getSub() + " ");
+				System.out.print("성적:"+ regi.student.get(i).getSubject().get(j).getScore() + " ");
+			}
+			System.out.println();
+		}
+	}
+
 	public void menu() {
+		print();
 		System.out.println("====시스템====");
 		System.out.println("1)학생등록");
 		System.out.println("2)수강신청");
@@ -26,13 +36,15 @@ public class control {
 		} else if (sel == 2) {
 			registration.regi.addSub();
 		} else if (sel == 3) {
-
+			registration.regi.score();
 		}
 
 	}
 
 	public void run() {
-		menu();
+		while (true) {
+			menu();
+		}
 	}
 
 }
