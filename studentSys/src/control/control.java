@@ -1,20 +1,30 @@
 package control;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
-public class control {
+import add.scoreAdd;
+import add.studentAdd;
+import add.subjectAdd;
+import model.student;
+import remove.studentremove;
+import remove.subjectremove;
 
+public class control {
+	public static ArrayList<student> student = new ArrayList<student>();
 	private static control instance = new control();
-	public static registration regi = new registration();
 	public static scoreAdd score = new scoreAdd();
-	public static studentAdd student = new studentAdd();
+	public static studentAdd student2 = new studentAdd();
 	public static subjectAdd subject = new subjectAdd();
+	public static studentremove remove = new studentremove();
+	public static subjectremove subremove = new subjectremove();
+	public static registration regi = new registration();
 
 	public static control getInstance() {
 		return instance;
 	}
 
-	Scanner scan = new Scanner(System.in);
+	public Scanner scan = new Scanner(System.in);
 
 	public void print() {
 		for (int i = 0; i < regi.student.size(); i++) {
@@ -33,13 +43,19 @@ public class control {
 		System.out.println("1)학생등록");
 		System.out.println("2)수강신청");
 		System.out.println("3)성적관리");
+		System.out.println("4)학생 퇴출");
+		System.out.println("5)수강 취소");
 		int sel = scan.nextInt();
 		if (sel == 1) {
-			student.add();
+			student2.add();
 		} else if (sel == 2) {
 			subject.addSub();
 		} else if (sel == 3) {
 			score.score();
+		} else if (sel == 4) {
+			remove.studentRemove();
+		} else if (sel == 5) {
+			subremove.subjectRemove();
 		}
 
 	}

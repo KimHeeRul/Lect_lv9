@@ -1,21 +1,15 @@
 package control;
 
-import java.util.ArrayList;
-
-import model.student;
-import model.subject;
-
-public class registration extends control implements check{
+public class registration extends control implements check {
 //	public static registration regi = new registration();
-	ArrayList<student> student = new ArrayList<student>();
-	
-	
+
 	@Override
 	public int nameCheck(String name) {
 		int idx = -1;
 		for (int i = 0; i < student.size(); i++) {
 			if (student.get(i).getName().equals(name)) {
 				idx = i;
+
 				break;
 			}
 		}
@@ -46,9 +40,6 @@ public class registration extends control implements check{
 //		}
 //	}
 
-	
-
-
 	@Override
 	public int subCheck(int idx, String sub) {// 과목체크
 		int idx2 = -1;
@@ -60,7 +51,7 @@ public class registration extends control implements check{
 		}
 		return idx2;
 	}
-	
+
 //	public void ModifyScore() {
 //		System.out.print("학생명 입력:");
 //		String name = scan.next();

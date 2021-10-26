@@ -1,5 +1,6 @@
-package control;
+package add;
 
+import control.registration;
 import model.student;
 
 public class studentAdd extends registration {

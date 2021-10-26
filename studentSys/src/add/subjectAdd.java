@@ -1,4 +1,6 @@
-package control;
+package add;
+
+import control.registration;
 
 public class subjectAdd extends registration {
 
