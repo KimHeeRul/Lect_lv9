@@ -1,10 +1,11 @@
 package remove;
 
+import add.add;
 import control.registration;
 
-public class subjectremove extends registration {
+public class subjectremove extends registration implements remove {
 
-	public void subjectRemove() {
+	public void removes() {
 		System.out.println("수강을 취소시킬 학생명:");
 		String name = scan.next();
 		int idx = nameCheck(name);

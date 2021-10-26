@@ -27,11 +27,11 @@ public class control {
 	public Scanner scan = new Scanner(System.in);
 
 	public void print() {
-		for (int i = 0; i < regi.student.size(); i++) {
-			System.out.print("학생명:" + regi.student.get(i).getName() + " ");
-			for (int j = 0; j < regi.student.get(i).getSubject().size(); j++) {
-				System.out.print("과목명:" + regi.student.get(i).getSubject().get(j).getSub() + " ");
-				System.out.print("성적:" + regi.student.get(i).getSubject().get(j).getScore() + " ");
+		for (int i = 0; i < student.size(); i++) {
+			System.out.print("학생명:" + student.get(i).getName() + " ");
+			for (int j = 0; j < student.get(i).getSubject().size(); j++) {
+				System.out.print("과목명:" + student.get(i).getSubject().get(j).getSub() + " ");
+				System.out.print("성적:" + student.get(i).getSubject().get(j).getScore() + " ");
 			}
 			System.out.println();
 		}
@@ -47,15 +47,15 @@ public class control {
 		System.out.println("5)수강 취소");
 		int sel = scan.nextInt();
 		if (sel == 1) {
-			student2.add();
+			student2.adds();
 		} else if (sel == 2) {
-			subject.addSub();
+			subject.adds();
 		} else if (sel == 3) {
-			score.score();
+			score.adds();
 		} else if (sel == 4) {
-			remove.studentRemove();
+			remove.removes();
 		} else if (sel == 5) {
-			subremove.subjectRemove();
+			subremove.removes();
 		}
 
 	}

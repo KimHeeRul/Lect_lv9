@@ -2,9 +2,9 @@ package remove;
 
 import control.registration;
 
-public class studentremove extends registration {
+public class studentremove extends registration implements remove{
 
-	public void studentRemove() {
+	public void removes() {
 		System.out.print("퇴출 시킬 학생이름:");
 		String name = scan.next();
 		int idx = nameCheck(name);

@@ -2,8 +2,8 @@ package add;
 
 import control.registration;
 
-public class scoreAdd extends registration {
-	public void score() {
+public class scoreAdd extends registration implements add{
+	public void adds() {
 		System.out.print("학생명 입력:");
 		String name = scan.next();
 		int idx = nameCheck(name);

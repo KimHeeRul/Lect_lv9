@@ -3,8 +3,8 @@ package add;
 import control.registration;
 import model.student;
 
-public class studentAdd extends registration {
-	public void add() {
+public class studentAdd extends registration implements add{
+	public void adds() {
 		System.out.print("등록할 학생의 이름:");
 		String name = scan.next();
 		int idx = nameCheck(name);
