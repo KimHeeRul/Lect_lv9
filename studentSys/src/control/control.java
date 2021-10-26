@@ -6,6 +6,9 @@ public class control {
 
 	private static control instance = new control();
 	public static registration regi = new registration();
+	public static scoreAdd score = new scoreAdd();
+	public static studentAdd student = new studentAdd();
+	public static subjectAdd subject = new subjectAdd();
 
 	public static control getInstance() {
 		return instance;
@@ -18,7 +21,7 @@ public class control {
 			System.out.print("切积疙:" + regi.student.get(i).getName() + " ");
 			for (int j = 0; j < regi.student.get(i).getSubject().size(); j++) {
 				System.out.print("苞格疙:" + regi.student.get(i).getSubject().get(j).getSub() + " ");
-				System.out.print("己利:"+ regi.student.get(i).getSubject().get(j).getScore() + " ");
+				System.out.print("己利:" + regi.student.get(i).getSubject().get(j).getScore() + " ");
 			}
 			System.out.println();
 		}
@@ -32,25 +35,25 @@ public class control {
 		System.out.println("3)己利包府");
 		int sel = scan.nextInt();
 		if (sel == 1) {
-			registration.regi.add();
+			student.add();
 		} else if (sel == 2) {
-			registration.regi.addSub();
+			subject.addSub();
 		} else if (sel == 3) {
-			scoreMenu();
+			score.score();
 		}
 
 	}
-	public void scoreMenu() {
-		System.out.println("1.己利眠啊");
-		System.out.println("2.己利荐沥");
-		int sel=scan.nextInt();
-		if (sel==1) {
-			registration.regi.score();			
-		}else if (sel==2) {
-			
-		}
-	}
-	
+
+//	public void scoreMenu() {
+//		System.out.println("1.己利眠啊");
+//		System.out.println("2.己利荐沥");
+//		int sel = scan.nextInt();
+//		if (sel == 1) {
+//	
+//		} else if (sel == 2) {
+//
+//		}
+//	}
 
 	public void run() {
 		while (true) {
