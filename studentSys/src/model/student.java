@@ -2,10 +2,15 @@ package model;
 
 import java.util.ArrayList;
 
-public class student {
+import control.registration;
+
+public class student extends registration{
 	private String name;
 	ArrayList<subject> subject = new ArrayList<subject>();
 
+	
+	
+	
 	public student(String name) {
 		this.name = name;
 	}

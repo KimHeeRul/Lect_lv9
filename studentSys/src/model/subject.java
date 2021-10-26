@@ -7,6 +7,7 @@ public class subject {
 	public subject(String sub) {
 		this.sub=sub;
 	}
+	
 	public String getSub() {
 		return sub;
 	}

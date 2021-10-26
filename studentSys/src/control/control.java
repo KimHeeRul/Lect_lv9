@@ -36,10 +36,21 @@ public class control {
 		} else if (sel == 2) {
 			registration.regi.addSub();
 		} else if (sel == 3) {
-			registration.regi.score();
+			scoreMenu();
 		}
 
 	}
+	public void scoreMenu() {
+		System.out.println("1.己利眠啊");
+		System.out.println("2.己利荐沥");
+		int sel=scan.nextInt();
+		if (sel==1) {
+			registration.regi.score();			
+		}else if (sel==2) {
+			
+		}
+	}
+	
 
 	public void run() {
 		while (true) {
