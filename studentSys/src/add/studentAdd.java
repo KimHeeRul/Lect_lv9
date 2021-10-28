@@ -16,3 +16,11 @@ public class studentAdd extends registration implements add{
 	}
 
 }
+
+//animal
+//meat diet:Tiger ,lion,Crocodile
+//Herbivore:Deer,Rabbit
+
+//sports
+//ball:Soccer, basketball, volleyball.
+//bodyExercise:swimming,Wrestling
