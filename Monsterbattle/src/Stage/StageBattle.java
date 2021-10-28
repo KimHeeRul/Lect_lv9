@@ -45,29 +45,29 @@ public class StageBattle extends Stage {
 
 			}
 			liveCheck();
-			if (monDead<=0||playerDead<=0) {//몬스터나 플레이어가 0명이하로 살아남았을때
-				break;//로비로탈출
+			if (monDead <= 0 || playerDead <= 0) {// 몬스터나 플레이어가 0명이하로 살아남았을때
+				break;// 로비로탈출
 			}
 		}
-		GameManager.nextStage="LOBBY";
+		GameManager.nextStage = "LOBBY";
 		return false;
 	}
 
-	void liveCheck() {//죽은 인원체크
-		int num=0;
+	void liveCheck() {// 죽은 인원체크
+		int num = 0;
 		for (int i = 0; i < playerList.size(); i++) {
-			if (playerList.get(i).curhp<=0) {
+			if (playerList.get(i).curhp <= 0) {
 				num++;
 			}
 		}
-		playerDead=playerList.size()-num;
-		num=0;
+		playerDead = playerList.size() - num;
+		num = 0;
 		for (int i = 0; i < monList.size(); i++) {
-			if (monList.get(i).curhp<=0) {
+			if (monList.get(i).curhp <= 0) {
 				num++;
 			}
 		}
-		monDead=monList.size()-num;
+		monDead = monList.size() - num;
 	}
 
 	private void printChar() {// 몬스터와 플레이어 정보 출력
@@ -98,6 +98,18 @@ public class StageBattle extends Stage {
 			}
 		} else {
 			System.out.println("스킬 미구현");
+			int skill = playerList.get(index).skill(monList.size());
+			if (skill == 1) {
+				int ran = rand.nextInt(monList.size());
+				if (monList.get(ran).curhp > 0) {// 랜덤선택된 몬스터의 체력이 0이상일경우 (dead체크)
+					playerList.get(index).skillAttack(monList.get(ran));// 플레이어의 어택에 몬스터 객체를 던져주기
+				}
+			} else if (skill == 2) {
+				playerList.get(index).curhp+=200;
+				if (playerList.get(index).curhp>playerList.get(index).maxhp) {
+					playerList.get(index).curhp=playerList.get(index).maxhp;
+				}
+			}
 		}
 	}
 
@@ -120,10 +132,10 @@ public class StageBattle extends Stage {
 	public void init() {
 		unitmanager.monList.clear();// 리스트 비우기
 		unitmanager.monster_rand_set(4);// 몬스터 4마리 세팅
-		
+
 		playerList = unitmanager.playerList;
-		monList=null;
-		monList=unitmanager.monList;
+		monList = null;
+		monList = unitmanager.monList;
 		playerDead = playerList.size();
 		monDead = monList.size();
 

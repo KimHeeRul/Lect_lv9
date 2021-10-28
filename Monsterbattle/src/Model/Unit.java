@@ -30,7 +30,6 @@ public class Unit {
 			System.out.println("["+target.name+"] 를 처치했습니다.");
 			target.curhp=0;
 		}
-		
 	}
 	
 }
