@@ -36,7 +36,12 @@ public class StageBattle extends Stage {
 				}
 			} else {// 만약 몬스터의 턴이라면
 				if (monsterIndex < monList.size()) {// 턴 순서
-					monsterAttack(monsterIndex);
+					int ran = rand.nextInt(2)+1;
+					if (ran == 0) {// 33%의확률로 스킬
+						monsterSkill(monsterIndex);
+					} else {
+						monsterAttack(monsterIndex);
+					}
 					monsterIndex++;
 				} else {
 					turn = true;// 턴 체인지
@@ -97,7 +102,6 @@ public class StageBattle extends Stage {
 				}
 			}
 		} else {
-			System.out.println("스킬 미구현");
 			int skill = playerList.get(index).skill(monList.size());
 			if (skill == 1) {
 				int ran = rand.nextInt(monList.size());
@@ -105,9 +109,9 @@ public class StageBattle extends Stage {
 					playerList.get(index).skillAttack(monList.get(ran));// 플레이어의 어택에 몬스터 객체를 던져주기
 				}
 			} else if (skill == 2) {
-				playerList.get(index).curhp+=200;
-				if (playerList.get(index).curhp>playerList.get(index).maxhp) {
-					playerList.get(index).curhp=playerList.get(index).maxhp;
+				playerList.get(index).curhp += 200;
+				if (playerList.get(index).curhp > playerList.get(index).maxhp) {
+					playerList.get(index).curhp = playerList.get(index).maxhp;
 				}
 			}
 		}
@@ -125,7 +129,30 @@ public class StageBattle extends Stage {
 		} else {
 			return;// 메소드 탈출
 		}
+	}
 
+	public void monsterSkill(int index) {// 몬스터 공격턴
+		if (monList.get(index).curhp > 0) {// 살아있는 몬스터라면
+			while (true) {
+				int ran = rand.nextInt(playerList.size());
+				if (playerList.get(ran).curhp > 0) {
+					String path = "Model.";
+					try {
+						Class<?> clazz = Class.forName(path+monList.get(index).name);
+						Object obj = clazz.getDeclaredConstructor().newInstance();
+						Unit temp = (Unit) obj;// 결정된 몬스터를 Unit화
+						
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					
+					monList.get(index).attack(playerList.get(ran));
+					break;
+				}
+			}
+		} else {
+			return;// 메소드 탈출
+		}
 	}
 
 	@Override
