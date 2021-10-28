@@ -10,7 +10,7 @@ public class UnitManager {
 
 	public Vector<Player> playerList = new Vector<>();
 	public Vector<Unit> monList = new Vector<>();
-	String path = "Control";
+	public String path = "Model.";
 	String mons[] = { "UnitWolf", "UnitBat", "UnitOrc" };
 	Random rand = new Random();
 
