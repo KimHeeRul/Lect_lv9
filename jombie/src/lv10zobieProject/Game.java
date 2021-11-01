@@ -102,6 +102,7 @@ public class Game {
 				break;
 			}
 			
+			
 			map(action);
 			int sel = scan.nextInt();
 			if (sel == 1) {
