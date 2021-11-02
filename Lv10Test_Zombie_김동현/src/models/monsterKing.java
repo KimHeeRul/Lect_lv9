@@ -30,7 +30,7 @@ public class monsterKing extends Unit {
 			dam = 1;
 		}
 		System.out.println(dam + "의 대미지");
-		unit.setHp(getHp() - dam);
+		unit.setHp(unit.getHp() - dam);
 		if (unit.getHp() <= 0) {
 			unit.setHp(0);
 		}

@@ -91,10 +91,11 @@ public class Game {
 		int check = 1;
 		while (true) {
 			this.floor = hero.getPos();
-			if (hero.getPos() > 12) {
+			if (hero.getPos() >= 12) {
 				System.out.println("생존성공");
 				break;
 			}
+			System.out.println(floor);
 			while (true) {
 				checkPoint(check);
 				int sel = scan.nextInt();

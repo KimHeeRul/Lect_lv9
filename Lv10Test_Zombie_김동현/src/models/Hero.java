@@ -31,7 +31,7 @@ public class Hero extends Unit {
 					king.setShield(0);
 					System.out.println("쉴드를 부셨습니다.");
 					int addAtt = sh - dam;
-					king.setHp(king.getHp() - addAtt);
+					king.setHp(king.getHp() + addAtt);
 				}
 				System.out.println(king.getName() + "의 남은 체력: " + king.getHp() + " (쉴드 : " + king.getShield() + ")");
 
@@ -65,8 +65,8 @@ public class Hero extends Unit {
 	public void drink() {// 회복물약
 		System.out.println("회복약을 마십니다.");
 		System.out.println("체력이 100회복 되었습니다.");
-		this.setHp(getHp() + 100);
-		System.out.println("용사의 남은 체력:" + getHp());
+		this.setHp(this.getHp() + 100);
+		System.out.println("용사의 남은 체력:" + this.getHp());
 		this.cnt -= 1;
 	}
 
