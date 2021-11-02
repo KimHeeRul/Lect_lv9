@@ -63,11 +63,15 @@ public class Hero extends Unit {
 	}
 
 	public void drink() {// 회복물약
+		if (cnt>0) {
 		System.out.println("회복약을 마십니다.");
 		System.out.println("체력이 100회복 되었습니다.");
 		this.setHp(this.getHp() + 100);
 		System.out.println("용사의 남은 체력:" + this.getHp());
 		this.cnt -= 1;
+		}else {
+			System.out.println("물약이 떨어졌다");
+		}
 	}
 
 }

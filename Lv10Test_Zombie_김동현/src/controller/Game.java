@@ -95,7 +95,6 @@ public class Game {
 				System.out.println("생존성공");
 				break;
 			}
-			System.out.println(floor);
 			while (true) {
 				checkPoint(check);
 				int sel = scan.nextInt();
