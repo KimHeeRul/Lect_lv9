@@ -24,23 +24,38 @@ public class monsterKing extends Unit {
 
 	@Override
 	public boolean attack(Unit unit) {// 좀비킹
-		System.out.println(this.name + "의 공격!");
-		int dam = (this.att - unit.def) * (ran.nextInt(150) + 50) / 100;
-		if (dam <= 0) {
-			dam = 1;
-		}
-		System.out.println(dam + "의 대미지");
-		unit.setHp(unit.getHp() - dam);
-		if (unit.getHp() <= 0) {
-			unit.setHp(0);
-		}
-		System.out.println(unit.getName() + "의 남은 체력:" + unit.getHp());
-		if (unit.getHp() > 0) {
-			return true;
+		boolean result = true;
+		if (ran.nextInt(100) > 74) {// 필살기확률
+			int dam = (this.getAtt() - unit.getDef()) * (ran.nextInt(150) + 50) / 100;
+			if (dam < 0) {// 0이하일때만 1로 고정
+				dam = 1;
+			}
+			dam *= 2;
+			System.out.println(getName() + "의 필살기!");
+			System.out.println(dam + "의 대미지");
+			unit.setHp(unit.getHp() - dam);
+			System.out.println(unit.getName() + "의 남은체력: " + unit.getHp());
 		} else {
-			System.out.println(unit.getName() + "처치");
-			System.out.println("승리했다.");
-			return false;
+			result = super.attack(unit);
+//			System.out.println(this.name + "의 공격!");
+//			int dam = (this.att - unit.def) * (ran.nextInt(150) + 50) / 100;
+//			if (dam <= 0) {
+//				dam = 1;
+//			}
+//			System.out.println(dam + "의 대미지");
+//			unit.setHp(unit.getHp() - dam);
+//			if (unit.getHp() <= 0) {
+//				unit.setHp(0);
+//			}
+//			System.out.println(unit.getName() + "의 남은 체력:" + unit.getHp());
+//			if (unit.getHp() > 0) {
+//				return true;
+//			} else {
+//				System.out.println(unit.getName() + "처치");
+//				System.out.println("승리했다.");
+//				return false;
+//			}
 		}
+		return result;
 	}
 }

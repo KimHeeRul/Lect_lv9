@@ -44,15 +44,7 @@ public class Hero extends Unit {
 		return result;
 	}
 
-//	public void KingAtt(monsterKing king) {
-//	
-//		}else {
-//			
-//		}
-//
-////		+"(½¯µå:"+this.shield+")"
-//
-//	}
+
 
 	public int getCnt() {
 		return cnt;
