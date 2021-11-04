@@ -64,7 +64,6 @@ class MyPanel3 extends JPanel implements ActionListener, Runnable {
 		setting();
 		resetB();
 		setMap();
-
 	}
 
 	public void time() {
@@ -103,7 +102,7 @@ class MyPanel3 extends JPanel implements ActionListener, Runnable {
 		reset.setText("¸®¼Â");
 		reset.setBounds(x2, y2, 100, 30);
 		add(reset);
-		reset.setVisible(false);
+		reset.setVisible(true);
 	}
 
 	public void setting() {
@@ -172,6 +171,12 @@ class MyPanel3 extends JPanel implements ActionListener, Runnable {
 
 		}
 		if (target == this.reset) {
+			isRun = false;
+			for (int i = 0; i < button.length; i++) {
+				this.button[i].setText(mark[i] + "");
+//				button[i].setBackground(Color.gray);
+				this.button[i].setVisible(false);
+			}
 			this.cnt = 1;
 			text2.setText(cnt + "");
 //			init();
@@ -179,13 +184,8 @@ class MyPanel3 extends JPanel implements ActionListener, Runnable {
 			setMap();
 			ms = 0;
 			this.timer.setText("0");
-//			for (int i = 0; i < button.length; i++) {
-//				if (this.button[i].getText().equals("0")) {
-//					this.button[i].setVisible(true);
-//				}
-//			}
 			revalidate();
-			reset.setVisible(false);
+			reset.setVisible(true);
 		}
 
 	}
