@@ -3,7 +3,6 @@ package game;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Panel;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,37 +16,85 @@ import javax.swing.JPanel;
 class ResultFrame2 extends JFrame {
 	private JLabel text = new JLabel();
 
-	public ResultFrame2(String winText) {
+	public ResultFrame2(int ms) {
+		setTitle("Game Clear");
+		setLayout(null);
+		setBounds(MyFrame3.width / 2 - 300 / 2, MyFrame3.height / 2 - 200 / 2, 300, 200);
+		text.setBounds(0, 0, 300, 200);
+		text.setText("게임 클리어\n" + String.format("성적: %5d.%3d 소요", ms / 1000, ms % 1000));
+		text.setHorizontalAlignment(JLabel.CENTER);
+		add(text);
+		setVisible(true);
+
 	}
 
 }
 
-class MyPanel3 extends JPanel implements ActionListener {
+class MyPanel3 extends JPanel implements ActionListener, Runnable {
 	JLabel text2 = new JLabel();
+	public int cnt = 1;
+	public JLabel timer = new JLabel("0");
+	JLabel text = new JLabel("");
+	int ms;
+	boolean isRun;
+
 	public JButton[] button = new JButton[25];
 	public JButton reset = new JButton();
 	public int[] mark = new int[25];
 	public int[] mark2 = new int[25];
-	private int win = 0;
-	public int cnt = 1;
+
+	static int init = 0;
 
 	public MyPanel3() {
-		setLayout(null);
-		setBounds(0, 0, MyFrame3.SIZE, MyFrame3.SIZE);
-		reset.addActionListener(this);
+		if (init == 0) {
+			setLayout(null);
+			setBounds(0, 0, MyFrame3.SIZE, MyFrame3.SIZE);
+			init();
+			init++;
+
+		}
+	}
+
+	public void init() {
+		Label2();
+		time();
+		setBackground(Color.white);
 		Label();
+		reset.addActionListener(this);
 		setting();
 		resetB();
 		setMap();
+
 	}
+
+	public void time() {
+		timer.setBounds(MyFrame3.SIZE - 100, 0, 100, 100);
+		timer.setVerticalAlignment(JLabel.TOP);
+		timer.setFont(new Font("Arial", Font.PLAIN, 20));
+		timer.setText("0");
+		add(timer);
+	}
+
+	public void Label2() {
+		text.setText("1 to 50");
+		text.setLayout(null);
+		text.setBounds(0, 0, MyFrame3.SIZE, 100);
+		text.setHorizontalAlignment(JLabel.CENTER);
+		text.setVerticalAlignment(JLabel.TOP);
+		text.setFont(new Font("Arial", Font.BOLD, 40));
+		text.setVisible(true);
+		add(text);
+		revalidate();
+	}
+
 	public void Label() {
 		text2.setLayout(null);
 		text2.setBounds(10, 0, 100, 100);
-		text2.setText(cnt+"");
+		text2.setText(cnt + "");
 		text2.setHorizontalAlignment(JLabel.LEFT);
 		text2.setFont(new Font("Arial", Font.PLAIN, 40));
 		add(text2);
-		
+
 	}
 
 	public void resetB() {
@@ -64,22 +111,19 @@ class MyPanel3 extends JPanel implements ActionListener {
 		for (int i = 0; i < mark.length; i++) {
 			mark[i] = i + 1;
 			mark2[i] = i + 1 + mark.length;
-			System.out.println(mark[i]);
-			System.out.println(mark2[i]);
 		}
 		int j = 0;
-		while (j < 1000) {// 마크셮
-			int r = rand.nextInt(25);
-			int temp = mark[0];
-			mark[0] = mark[r];
-			mark[r] = temp;
-			j++;
-			r = rand.nextInt(25);
-			temp = mark2[0];
-			mark2[0] = mark2[r];
-			mark2[r] = temp;
-		}
-
+//		while (j < 1000) {// 셔플
+//			int r = rand.nextInt(25);
+//			int temp = mark[0];
+//			mark[0] = mark[r];
+//			mark[r] = temp;
+//			j++;
+//			r = rand.nextInt(25);
+//			temp = mark2[0];
+//			mark2[0] = mark2[r];
+//			mark2[r] = temp;
+//		}
 	}
 
 	public void setMap() {
@@ -90,6 +134,9 @@ class MyPanel3 extends JPanel implements ActionListener {
 			button[i].addActionListener(this);// 액션리스너
 			button[i].setText(mark[i] + "");
 			button[i].setBounds(x, y, 50, 50);
+			button[i].setVisible(true);
+			button[i].setBackground(Color.gray);
+			revalidate();
 			add(button[i]);
 			x += 53;
 			if (i % 5 == 4) {
@@ -105,20 +152,38 @@ class MyPanel3 extends JPanel implements ActionListener {
 		for (int i = 0; i < button.length; i++) {
 			if (target == this.button[i] && this.button[i].getText().equals(cnt + "")) {
 				// 마크2에 있는거랑 체인지
-				this.button[i].setText(mark2[i]+"");
-				mark2[i]=0;
+				if (!isRun) {
+					isRun = true;
+				}
+
+				this.button[i].setText(mark2[i] + "");
+				button[i].setBackground(Color.red);
+				mark2[i] = 0;
 				this.cnt++;
-				text2.setText(cnt+"");
-				break;
+				if (cnt <= 50) {
+					text2.setText(cnt + "");
+				}
+				checkWin();
+				revalidate();
+				if (this.button[i].getText().equals("0")) {
+					this.button[i].setVisible(false);
+				}
 			}
+
 		}
 		if (target == this.reset) {
-			for (int i = 0; i < button.length; i++) {
-				this.button[i].setBackground(new Color(223, 216, 202));
-			}
-			mark = new int[9];
-			win = 0;
-//			setMap();
+			this.cnt = 1;
+			text2.setText(cnt + "");
+//			init();
+			setting();
+			setMap();
+			ms = 0;
+			this.timer.setText("0");
+//			for (int i = 0; i < button.length; i++) {
+//				if (this.button[i].getText().equals("0")) {
+//					this.button[i].setVisible(true);
+//				}
+//			}
 			revalidate();
 			reset.setVisible(false);
 		}
@@ -126,13 +191,27 @@ class MyPanel3 extends JPanel implements ActionListener {
 	}
 
 	public void checkWin() {
-		if (this.win != 0) {
-			System.out.printf("p%d의 승!\n", this.win);
-//			new ResultFrame(String.format("p%d의 승!\n", this.turn));
-//			new reset();
+		if (this.cnt == 51) {
+			isRun = false;
+			new ResultFrame2(ms);
 			reset.setVisible(true);
 		}
 
+	}
+
+	@Override
+	public void run() {
+		while (true) {
+			if (isRun) {
+				ms++;
+				this.timer.setText(String.format("%5d.%3d", this.ms / 1000, this.ms % 1000));
+			}
+			try {
+				Thread.sleep(1);
+			} catch (Exception e) {
+
+			}
+		}
 	}
 
 }
@@ -145,35 +224,22 @@ class MyFrame3 extends JFrame {
 
 	public static final int SIZE = 500;
 
-	public MyFrame3() {
+	MyPanel3 panel = new MyPanel3();
 
+	public MyFrame3() {
 		setLayout(null);// null로 변경해서 순서대로나열인걸 변경할수있도록 변경
 		setTitle("1 to 50 ");
 		setBounds(width / 2 - SIZE / 2, height / 2 - SIZE / 2, SIZE, SIZE);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		add(panel);
 		setVisible(true);
 		revalidate();
-
-		Label();
-
-		add(new MyPanel3());
-
-	}
-
-	public void Label() {
-		JLabel text = new JLabel("1 to 50");
-		text.setLayout(null);
-		text.setBounds(0, 0, SIZE, 100);
-		text.setHorizontalAlignment(JLabel.CENTER);
-		text.setFont(new Font("Arial", Font.BOLD, 50));
-		add(text);
-		text.setVisible(true);
+		panel.run();
 	}
 }
 
 public class Ex07 {
 	public static void main(String[] args) {
 		MyFrame3 frame = new MyFrame3();
-
 	}
 }
