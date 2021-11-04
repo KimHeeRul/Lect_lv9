@@ -174,14 +174,14 @@ class MyPanel3 extends JPanel implements ActionListener, Runnable {
 			isRun = false;
 			for (int i = 0; i < button.length; i++) {
 				this.button[i].setText(mark[i] + "");
-//				button[i].setBackground(Color.gray);
+				button[i].setBackground(Color.gray);
 				this.button[i].setVisible(false);
 			}
 			this.cnt = 1;
 			text2.setText(cnt + "");
-//			init();
-			setting();
-			setMap();
+			init();
+//			setting();
+//			setMap();
 			ms = 0;
 			this.timer.setText("0");
 			revalidate();
