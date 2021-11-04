@@ -173,17 +173,16 @@ class MyPanel3 extends JPanel implements ActionListener, Runnable {
 		}
 		if (target == this.reset) {
 			isRun = false;
-			for (int i = 0; i < button.length; i++) {
-				this.button[i].setText(mark[i] + "");
-				this.button[i].setVisible(false);
-				button[i].setBackground(Color.gray);
-			}
 			this.cnt = 1;
 			text2.setText(cnt + "");
 			reset.setVisible(false);
-			init();
-//			setting();
-//			setMap();
+			setting();
+			for (int i = 0; i < button.length; i++) {
+				this.button[i].setText(mark[i] + "");
+				this.button[i].setVisible(true);
+				button[i].setBackground(Color.gray);
+				
+			}
 			ms = 0;
 			this.timer.setText("0");
 			revalidate();
