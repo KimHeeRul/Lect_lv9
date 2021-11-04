@@ -107,6 +107,7 @@ class MyPanel3 extends JPanel implements ActionListener, Runnable {
 
 	public void setting() {
 		Random rand = new Random();
+		reset.setVisible(true);
 		for (int i = 0; i < mark.length; i++) {
 			mark[i] = i + 1;
 			mark2[i] = i + 1 + mark.length;
@@ -174,18 +175,18 @@ class MyPanel3 extends JPanel implements ActionListener, Runnable {
 			isRun = false;
 			for (int i = 0; i < button.length; i++) {
 				this.button[i].setText(mark[i] + "");
-				button[i].setBackground(Color.gray);
 				this.button[i].setVisible(false);
+				button[i].setBackground(Color.gray);
 			}
 			this.cnt = 1;
 			text2.setText(cnt + "");
+			reset.setVisible(false);
 			init();
 //			setting();
 //			setMap();
 			ms = 0;
 			this.timer.setText("0");
 			revalidate();
-			reset.setVisible(true);
 		}
 
 	}
