@@ -176,7 +176,7 @@ class MyPanel3 extends JPanel implements ActionListener, Runnable {
 			this.cnt = 1;
 			text2.setText(cnt + "");
 			reset.setVisible(false);
-			setting();
+			setting();//세팅을 먼저하고 그거에대한 버튼값을 조정 
 			for (int i = 0; i < button.length; i++) {
 				this.button[i].setText(mark[i] + "");
 				this.button[i].setVisible(true);
