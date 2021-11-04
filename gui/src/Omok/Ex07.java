@@ -126,7 +126,7 @@ class MyPanel3 extends JPanel implements ActionListener {
 			for (int i = 0; i < mark.length; i++) {
 				for (int j = 0; j < mark[i].length; j++) {
 					this.mark[i][j] = 0;
-					this.button[i][j].setBackground(Color.gray);
+					this.button[i][j].setBackground(new Color(157, 92, 13));
 					this.win = 0;
 				}
 			}
