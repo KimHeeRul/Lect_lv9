@@ -13,45 +13,56 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-class ResultFrame2 extends JFrame {
+class ResultFrame2 extends JFrame implements ActionListener {
 	private JLabel text = new JLabel();
+	public JButton reset = new JButton();
 
-	public ResultFrame2(int turn) {
+	public ResultFrame2(int turn ) {
 		setTitle("Game Clear");
 		setLayout(null);
-		setBounds(MyFrame3.width / 2 - 300 / 2, MyFrame3.height / 2 - 200 / 2, 300, 200);
+		int x = MyFrame3.width / 2 - 300 / 2;
+		int y = MyFrame3.height / 2 - 200 / 2;
+		setBounds(x, y, 300, 200);
 		text.setBounds(0, 0, 300, 200);
 		text.setText("½ÂÀÚ:P" + turn);
 		text.setHorizontalAlignment(JLabel.CENTER);
 		add(text);
+		resetB(x, y);
 		setVisible(true);
+	}
+
+	public void resetB(int x, int y) {
+		int x2 = 300 / 2 - 100 / 2;
+		int y2 = 200 / 2 - 30 * 2;
+		reset.setText("¸®¼Â");
+		reset.setBounds(x2, y2, 100, 30);
+		add(reset);
+		reset.setVisible(true);
+		reset.addActionListener(this);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		JButton target = (JButton) e.getSource();
+		if (target == this.reset) {
+			MyPanel3.resetB2();
+			dispose();
+		}
 
 	}
 
 }
 
 class MyPanel3 extends JPanel implements ActionListener {
-	JLabel text2 = new JLabel();
 	JLabel text = new JLabel("");
 	int turn = 1;
-	int win = 0;
-	public JButton[][] button = new JButton[10][10];
-	public JButton reset = new JButton();
-	public int[][] mark = new int[10][10];
-
-	static int init = 0;
-
+	public static int win = 0;
+	public static JButton[][] button = new JButton[10][10];
+	public static JButton reset = new JButton();
+	public static int[][] mark = new int[10][10];
 	public MyPanel3() {
-		if (init == 0) {
-			setLayout(null);
-			setBounds(0, 0, MyFrame3.SIZE, MyFrame3.SIZE);
-			init();
-			init++;
-
-		}
-	}
-
-	public void init() {
+		setLayout(null);
+		setBounds(0, 0, MyFrame3.SIZE, MyFrame3.SIZE);
 		Label2();
 		setBackground(new Color(229, 137, 10));
 		resetB();
@@ -66,7 +77,6 @@ class MyPanel3 extends JPanel implements ActionListener {
 		text.setFont(new Font("Arial", Font.BOLD, 40));
 		text.setVisible(true);
 		add(text);
-		revalidate();
 	}
 
 	public void resetB() {
@@ -90,7 +100,6 @@ class MyPanel3 extends JPanel implements ActionListener {
 				button[i][j].setBounds(x, y, 50, 50);
 				button[i][j].setVisible(true);
 				button[i][j].setBackground(new Color(157, 92, 13));
-				revalidate();
 				add(button[i][j]);
 				x += 53;
 				if (j % 10 == 9) {
@@ -135,13 +144,22 @@ class MyPanel3 extends JPanel implements ActionListener {
 	}
 
 	public void checkWin() {
-		this.win = this.win == 0 ? checkHori() : this.win;
-		this.win = this.win == 0 ? checkVerti() : this.win;
-		this.win = this.win == 0 ? checDia() : this.win;
-		this.win = this.win == 0 ? checReverse() : this.win;
-		if (this.win != 0) {
+		win =win == 0 ? checkHori() : win;
+		win = win == 0 ? checkVerti() : win;
+		win = win == 0 ? checDia() : win;
+		win = win == 0 ? checReverse() : win;
+		if (win != 0) {
 			new ResultFrame2(this.turn);
+		}
+	}
 
+	public static void resetB2() {
+		for (int i = 0; i < mark.length; i++) {
+			for (int j = 0; j < mark[i].length; j++) {
+				mark[i][j] = 0;
+				button[i][j].setBackground(new Color(157, 92, 13));
+				win = 0;
+			}
 		}
 	}
 
@@ -246,7 +264,6 @@ class MyFrame3 extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		add(panel);
 		setVisible(true);
-		revalidate();
 	}
 }
 
