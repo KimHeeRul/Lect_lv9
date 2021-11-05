@@ -84,7 +84,7 @@ class MyPanel3 extends JPanel implements ActionListener {
 		int y2 = MyFrame3.SIZE / 2 + 300;
 		reset.setText("리셋");
 		reset.setBounds(x2, y2, 100, 30);
-		add(reset);
+		add(reset,0);//우선순위 0 최우선순위
 		reset.setVisible(true);
 		reset.addActionListener(this);
 
@@ -132,13 +132,10 @@ class MyPanel3 extends JPanel implements ActionListener {
 
 		}
 		if (target == this.reset) {
-			for (int i = 0; i < mark.length; i++) {
-				for (int j = 0; j < mark[i].length; j++) {
-					this.mark[i][j] = 0;
-					this.button[i][j].setBackground(new Color(157, 92, 13));
-					this.win = 0;
-				}
-			}
+			resetB2();
+//			remove(reset);//리셋버튼 삭제
+//			revalidate();//리무브시 필수
+//			repaint();//리무브시 필수
 		}
 
 	}
@@ -161,8 +158,10 @@ class MyPanel3 extends JPanel implements ActionListener {
 				win = 0;
 			}
 		}
+		
 	}
 
+	
 	private int checReverse() {
 		for (int i = 0; i <= 5; i++) {
 			int cnt = 0;
