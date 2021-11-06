@@ -206,7 +206,8 @@ class MyPanel5 extends JPanel implements MouseListener, ActionListener {
 				draw temp = this.map[i][j];
 //				g.setColor(Color.gray);
 //				g.drawRect(temp.getX(), temp.getY(), temp.getWidth(), temp.getHeight());
-				// 실제 그려지는맵
+				// 실제 그려지는맵.
+				
 
 				if (map[i][j].isSet()) {
 					g.setColor(Color.black);
