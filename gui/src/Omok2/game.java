@@ -282,7 +282,7 @@ class MyPanel5 extends JPanel implements MouseListener, ActionListener {
 		}
 		return 0;
 	}
-
+zz
 	private int checDia() {
 		for (int i = 0; i <= 5; i++) {
 			int cnt = 0;
