@@ -122,7 +122,7 @@ class MyPanel5 extends JPanel implements MouseListener, ActionListener {
 	private static draw[][] map = new draw[10][10];// 褒薯高
 	private draw[][] map2 = new draw[9][9];// 參高
 	private static int[][] mark = new int[10][10];
-	int turn = 1;
+	static int turn = 1;
 	public static int win = 0;
 
 	public MyPanel5() {
@@ -137,14 +137,14 @@ class MyPanel5 extends JPanel implements MouseListener, ActionListener {
 	}
 
 	private void setMap() {
-		int x = (MyFrame5.SIZE / 2 - 50 * 10 / 2) + 25;
-		int y = (MyFrame5.SIZE / 2 - 50 * 10 / 2) + 25;
+		int x = (MyFrame5.SIZE / 2 - 50 * 10 / 2);
+		int y = (MyFrame5.SIZE / 2 - 50 * 10 / 2);
 		for (int i = 0; i < map.length; i++) {
 			for (int j = 0; j < map[i].length; j++) {
 				map[i][j] = new draw(x, y, 50, 50);// 褒薯高
 				x += 50;
 				if (j % 10 == 9) {
-					x = (MyFrame5.SIZE / 2 - 50 * 10 / 2) + 25;
+					x = (MyFrame5.SIZE / 2 - 50 * 10 / 2);
 					y += 50;
 				}
 			}
@@ -154,14 +154,14 @@ class MyPanel5 extends JPanel implements MouseListener, ActionListener {
 	}
 
 	private void setMap2() {
-		int x = (MyFrame5.SIZE / 2 - 50 * 9 / 2);
-		int y = (MyFrame5.SIZE / 2 - 50 * 9 / 2);
+		int x = (MyFrame5.SIZE / 2 - 50 * 9 / 2)-25;
+		int y = (MyFrame5.SIZE / 2 - 50 * 9 / 2)-25;
 		for (int i = 0; i < map2.length; i++) {
 			for (int j = 0; j < map2[i].length; j++) {
 				map2[i][j] = new draw(x + 25, y + 25, 50, 50);// 參高
 				x += 50;
 				if (j % 9 == 8) {
-					x = (MyFrame5.SIZE / 2 - 50 * 9 / 2);
+					x = (MyFrame5.SIZE / 2 - 50 * 9 / 2)-25;
 					y += 50;
 				}
 			}
@@ -383,6 +383,7 @@ class MyPanel5 extends JPanel implements MouseListener, ActionListener {
 				mark[i][j] = 0;
 				map[i][j].setSet(false);
 				win = 0;
+				turn=1;
 			}
 		}
 	}
