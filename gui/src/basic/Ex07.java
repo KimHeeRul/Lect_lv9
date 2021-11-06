@@ -126,7 +126,7 @@ class MyPanel4 extends JPanel implements MouseListener{
 		System.out.println(x+"/"+y);
 //		System.out.println(this.nemo.getX());
 //		if (x>=this.nemo.getX()&& x<this.nemo.getX()+this.nemo.getWidth()&& 
-//			y>=this.nemo.getX()&& y<this.nemo.getY()+this.nemo.getHeight()) {//클릭이 네모 안에있을때
+//			y>=this.nemo.getY()&& y<this.nemo.getY()+this.nemo.getHeight()) {//클릭이 네모 안에있을때
 //			this.nemo.setC(Color.red);
 //		}
 	}
