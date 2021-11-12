@@ -3,6 +3,8 @@ package basic;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -33,37 +35,48 @@ class MyPanel extends JPanel {
 
 }
 
-class Contents extends JPanel implements ActionListener{
-	
-	private JButton bt=new JButton();
+class Contents extends JPanel implements ActionListener, MouseMotionListener {
+
+	private JButton bt = new JButton();
 	boolean check;
+
 	public Contents() {
 		setLayout(null);
-		setBounds(0,0,500,400);
-		//버튼 속성 설정
+		setBounds(0, 0, 500, 400);
+		// 버튼 속성 설정
 		System.out.println(this.bt);
-		bt.setBounds(100,100,100,100);
-		bt.setText("Button");//텍스트
-		bt.setBackground(Color.gray);//버튼 배경
-		bt.addActionListener(this);//액션리스너
+		bt.setBounds(100, 100, 100, 100);
+		bt.setText("Button");// 텍스트
+		bt.setBackground(Color.gray);// 버튼 배경
+		bt.addActionListener(this);// 액션리스너
+		addMouseMotionListener(this);
 		add(bt);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		System.out.println(e.getSource());
-		if (e.getSource()==this.bt&&!this.check) {
+		if (e.getSource() == this.bt && !this.check) {
 			this.bt.setBackground(Color.red);
-			this.check=true;
-		}else {
+			this.check = true;
+		} else {
 			this.bt.setBackground(Color.gray);
-			this.check=false;
+			this.check = false;
 		}
-			
-		}
-		
+
 	}
 
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		System.out.println("dragged");
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		System.out.println("move");
+	}
+
+}
 
 class MyFrame extends JFrame {
 
@@ -87,12 +100,11 @@ class MyFrame extends JFrame {
 		// Gui닫으면 자바 종료
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-		
 		add(new Contents());
-		
+
 		// add
-		 add(new MyPanel(0,0,250,400,Color.black));
-		 add(new MyPanel(250,0,250,400,Color.white));
+		add(new MyPanel(0, 0, 250, 400, Color.black));
+		add(new MyPanel(250, 0, 250, 400, Color.white));
 		// add(new MyPanel2());
 
 		// 보이기
