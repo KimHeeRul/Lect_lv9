@@ -371,7 +371,7 @@ class MyFrame extends JFrame {
 
 	public MyFrame() {
 		setLayout(null);
-		setTitle("move");
+		setTitle("draw");
 		setBounds(width / 2 - SIZE / 2, height / 2 - SIZE / 2, SIZE + 10, SIZE + 40);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		add(new MyPanel());
