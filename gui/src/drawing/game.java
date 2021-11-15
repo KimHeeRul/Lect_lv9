@@ -242,6 +242,8 @@ class MyPanel extends MyUtill {
 		if (e.getSource() == reset) {
 			for (int i = 0; i < rect.size(); i++) {
 				rect.clear();
+				Round.clear();
+				Tr.clear();
 			}
 			rect2 = null;
 
