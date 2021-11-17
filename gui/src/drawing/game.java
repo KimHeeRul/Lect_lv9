@@ -73,16 +73,19 @@ class MyPanel extends MyUtill {
 	ArrayList<draw> rect = new ArrayList<draw>();
 	ArrayList<draw> Round = new ArrayList<draw>();
 	ArrayList<draw> Tr = new ArrayList<draw>();
+	ArrayList<draw> Tr2 = new ArrayList<draw>();
+	ArrayList<draw> line = new ArrayList<draw>();
+
 	draw rect2 = null;
-	draw rect3 = null;
-	String[] btnText = { "ㅁ", "ㅇ", "ㅅ" };
-//	boolean Rectangle = true, Round, Triangle;
-	JButton[] btn = new JButton[3];
+
+	String[] btnText = { "ㅁ", "ㅇ", "ㅅ", "ㅡ" };
+	JButton[] btn = new JButton[4];
 
 	private final int Rectangle = 0;
 	private final int Rount = 1;
 	private final int Triangle = 2;
-
+	private final int LINE = 3;
+	boolean re;
 	int type;
 
 	public MyPanel() {
@@ -103,7 +106,7 @@ class MyPanel extends MyUtill {
 		reset.addMouseListener(this);
 		reset.setText("reset");
 		add(reset);
-		int x = 500;
+		int x = 400;
 		for (int i = 0; i < btn.length; i++) {
 			btn[i] = new JButton();
 			btn[i].setBounds(x, 720, 100, 50);
@@ -132,6 +135,11 @@ class MyPanel extends MyUtill {
 				if (i == Triangle) {
 					this.type = 2;
 				}
+
+				if (i == LINE) {
+					this.type = 3;
+				}
+
 			}
 		}
 
@@ -171,6 +179,35 @@ class MyPanel extends MyUtill {
 				g.drawPolygon(xx, yy, 3);
 			}
 		}
+		for (int i = 0; i < Tr2.size(); i++) {// 삼각형2
+			if (this.Tr2.get(i) != null) {
+				g.setColor(Color.red);
+				int[] xx = new int[3];
+				int[] yy = new int[3];
+				xx[0] = Tr2.get(i).getX();
+				yy[0] = Tr2.get(i).getY();
+
+				xx[1] = (Tr2.get(i).getX() + Tr2.get(i).getWidth() / 2);
+				yy[1] = Tr2.get(i).getY() + +Tr2.get(i).getHeight();
+
+				xx[2] = Tr2.get(i).getX() + Tr2.get(i).getWidth();
+				yy[2] = Tr2.get(i).getY();
+				g.drawPolygon(xx, yy, 3);
+			}
+		}
+		for (int i = 0; i < line.size(); i++) {
+			if (this.line.get(i) != null) {
+				g.setColor(Color.red);
+				int[] xx = new int[2];
+				int[] yy = new int[2];
+				xx[0] = line.get(i).getX();
+				yy[0] = line.get(i).getY();
+				
+				xx[1] = line.get(i).getX() ;
+				yy[1] = line.get(i).getY();
+				g.drawPolyline(xx, yy, xx.length);
+			}
+		}
 
 		if (rect2 != null) {
 			g.setColor(Color.red);
@@ -181,7 +218,7 @@ class MyPanel extends MyUtill {
 				g.drawRoundRect(rect2.getX(), rect2.getY(), rect2.getWidth(), rect2.getHeight(), rect2.getWidth(),
 						rect2.getHeight());
 			}
-			if (this.type == Triangle) {
+			if (this.type == Triangle && !re) {
 				int[] xx = new int[3];
 				int[] yy = new int[3];
 				xx[0] = rect2.getX();
@@ -193,6 +230,28 @@ class MyPanel extends MyUtill {
 				xx[2] = rect2.getX() + rect2.getWidth();
 				yy[2] = rect2.getY() + rect2.getHeight();
 				g.drawPolygon(xx, yy, 3);
+
+			}
+			if (this.type == Triangle && re) {
+				int[] xx = new int[3];
+				int[] yy = new int[3];
+				xx[0] = rect2.getX();
+				yy[0] = rect2.getY();
+
+				xx[1] = (rect2.getX() + rect2.getWidth() / 2);
+				yy[1] = rect2.getY() + +rect2.getHeight();
+
+				xx[2] = rect2.getX() + rect2.getWidth();
+				yy[2] = rect2.getY();
+				g.drawPolygon(xx, yy, 3);
+			}
+			if (this.type == LINE) {
+				int[] xx = new int[2];
+//				ArrayList<Integer> xx = new ArrayList<Integer>();
+//				ArrayList<Integer> yy = new ArrayList<Integer>();
+//				xx.add(rect2.getX());
+//				yy.add(rect2.getY());
+//				g.drawPolyline(xx.get(i), yy, xx.size());
 			}
 		}
 
@@ -214,9 +273,16 @@ class MyPanel extends MyUtill {
 				Round.add(new draw(rect2.getX(), rect2.getY(), rect2.getWidth(), rect2.getHeight()));
 			}
 
-			if (this.type == Triangle) {
+			if (this.type == Triangle && !re) {
 				Tr.add(new draw(rect2.getX(), rect2.getY(), rect2.getWidth(), rect2.getHeight()));
 			}
+			if (this.type == Triangle && re) {
+				Tr2.add(new draw(rect2.getX(), rect2.getY(), rect2.getWidth(), rect2.getHeight()));
+			}
+			if (this.type == LINE) {
+				line.add(new draw(rect2.getX(), rect2.getY(), rect2.getWidth(), rect2.getHeight()));
+			}
+
 			rect2 = null;
 		}
 	}
@@ -240,11 +306,11 @@ class MyPanel extends MyUtill {
 	@Override
 	public void mousePressed(MouseEvent e) {
 		if (e.getSource() == reset) {
-			for (int i = 0; i < rect.size(); i++) {
-				rect.clear();
-				Round.clear();
-				Tr.clear();
-			}
+			rect.clear();
+			Round.clear();
+			Tr.clear();
+			Tr2.clear();
+			line.clear();
 			rect2 = null;
 
 		} else {
@@ -254,6 +320,7 @@ class MyPanel extends MyUtill {
 			this.x = pressX;
 			this.y = pressY;
 		}
+		
 
 	}
 
@@ -276,7 +343,12 @@ class MyPanel extends MyUtill {
 		if (y < this.y) {
 			rY = this.y - h;
 		}
-		this.rect2 = new draw(rX, rY, w, h);
+		if (y < this.y) {
+			re = true;
+		} else {
+			re = false;
+		}
+			this.rect2 = new draw(rX, rY, w, h);
 
 //		int pressX=this.x;
 //		int pressY=this.y;
