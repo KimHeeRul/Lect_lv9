@@ -20,20 +20,23 @@ public class MyPanel extends MyUtill {
 	Box box[] = new Box[7];
 	onBox onbox[] = new onBox[7];
 	Point point[] = new Point[7];
+
 	Wall wall[] = new Wall[50];
 	Tile tile[] = new Tile[50];
 	Char me = null;
 	boolean left, up, down, right, move;
 	int map[][] = new int[9][8];
+	int Checkpoint[][] = new int[9][8];
 	String fileName = "map.txt";
 	String text = "";
-	boolean pointCheck;
+	boolean pointCheck, pointCheck2;
 	final int box2 = 4;
 	final int point2 = 5;
 	final int wall2 = 2;
 	final int me2 = 3;
 	final int tile2 = 1;
 	final int onbox2 = 6;
+	boolean win;
 
 	public MyPanel() {
 		setLayout(null);
@@ -71,7 +74,7 @@ public class MyPanel extends MyUtill {
 		setTile();
 		setChar();
 		setPoint();
-
+		win = false;
 	}
 
 	private void setMap() {
@@ -147,9 +150,18 @@ public class MyPanel extends MyUtill {
 			for (int j = 0; j < map[i].length; j++) {
 				if (map[i][j] == point2) {
 					point[x] = new Point(j, i, "tile5");
+					Checkpoint[i][j] = 1;
 					x++;
+				} else {
+					Checkpoint[i][j] = 0;
 				}
 			}
+		}
+		for (int i = 0; i < Checkpoint.length; i++) {
+			for (int j = 0; j < Checkpoint[i].length; j++) {
+				System.out.print(Checkpoint[i][j]);
+			}
+			System.out.println();
 		}
 	}
 
@@ -212,19 +224,7 @@ public class MyPanel extends MyUtill {
 				}
 			}
 		}
-
-		for (int x = 0; x < point.length; x++) {
-			Point temp = point[x];
-			if (temp != null) {
-				for (int i = 0; i < map.length; i++) {
-					for (int j = 0; j < map[i].length; j++) {
-						if (map[i][j] == point2) {
-							g.drawImage(temp.getImage().getImage(), j * 50, i * 50, null);
-						}
-					}
-				}
-			}
-		}
+		
 		for (int x = 0; x < wall.length; x++) {
 			Wall temp = wall[x];
 			if (temp != null) {
@@ -243,14 +243,37 @@ public class MyPanel extends MyUtill {
 				for (int i = 0; i < map.length; i++) {
 					for (int j = 0; j < map[i].length; j++) {
 						if (map[i][j] == tile2) {
-							tile[x].setY(i);
-							tile[x].setX(j);
+//							tile[x].setY(i);
+//							tile[x].setX(j);
 							g.drawImage(temp.getImage().getImage(), j * 50, i * 50, null);
 						}
 					}
 				}
 			}
 		}
+		for (int x = 0; x < point.length; x++) {
+			Point temp = point[x];
+			for (int i = 0; i < Checkpoint.length; i++) {
+				for (int j = 0; j < Checkpoint[i].length; j++) {
+					if (Checkpoint[i][j] == 1&&map[i][j] ==tile2 ) {
+						map[i][j] = point2;
+					}
+//					System.out.print(Checkpoint[i][j]);
+				}
+//				System.out.println();
+			}
+			if (temp != null) {
+				for (int i = 0; i < map.length; i++) {
+					for (int j = 0; j < map[i].length; j++) {
+						if (map[i][j] == point2) {
+							g.drawImage(temp.getImage().getImage(), j * 50, i * 50, null);
+						}
+					}
+				}
+			}
+		}
+
+		
 		for (int i = 0; i < map.length; i++) {
 			for (int j = 0; j < map[i].length; j++) {
 				if (map[i][j] == me2) {
@@ -269,18 +292,21 @@ public class MyPanel extends MyUtill {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		super.keyPressed(e);
-		if (e.getKeyCode() == e.VK_RIGHT) {
-			right = true;
-		} else if (e.getKeyCode() == e.VK_LEFT) {
-			left = true;
-		} else if (e.getKeyCode() == e.VK_UP) {
-			up = true;
-		} else if (e.getKeyCode() == e.VK_DOWN) {
-			down = true;
-		}
+		if (!win) {
+			System.out.println("1");
+			if (e.getKeyCode() == e.VK_RIGHT) {
+				right = true;
+			} else if (e.getKeyCode() == e.VK_LEFT) {
+				left = true;
+			} else if (e.getKeyCode() == e.VK_UP) {
+				up = true;
+			} else if (e.getKeyCode() == e.VK_DOWN) {
+				down = true;
+			}
 
-		moveCheck();
-		winCheck();
+			moveCheck();
+			winCheck();
+		}
 	}
 
 	private void winCheck() {
@@ -293,7 +319,9 @@ public class MyPanel extends MyUtill {
 			}
 		}
 		if (cnt == point.length) {
+			win = true;
 			new result();
+
 		}
 
 	}
@@ -317,7 +345,8 @@ public class MyPanel extends MyUtill {
 			pointCheck = true;
 			map[me.getY()][me.getX()] = tile2;
 			map[yy][xx] = me2;
-		} else {
+		} 
+		else {
 			System.out.println(pointCheck);
 
 			move = true;
@@ -327,7 +356,6 @@ public class MyPanel extends MyUtill {
 			int ballY = yy;
 			int ballX = xx;
 
-			System.out.println("ds");
 			if (right == true && map[ballY][ballX + 1] != wall2 && map[ballY][ballX + 1] != box2
 					&& map[ballY][ballX + 1] != onbox2) {
 				if (map[ballY][ballX] == onbox2) {
@@ -351,7 +379,6 @@ public class MyPanel extends MyUtill {
 					&& map[ballY + 1][ballX] != onbox2) {
 				if (map[ballY][ballX] == onbox2) {
 					check = true;
-					System.out.println("342");
 				}
 				ballY++;
 			} else {
@@ -367,8 +394,6 @@ public class MyPanel extends MyUtill {
 				}
 			}
 
-		} else {
-			System.out.println("dsddsds");
 		}
 
 		if (map[yy][xx] == wall2) {
@@ -376,7 +401,6 @@ public class MyPanel extends MyUtill {
 			move = false;
 		}
 		if (move) {
-
 			if (pointCheck) {
 				pointCheck = false;
 				map[me.getY()][me.getX()] = point2;
@@ -414,26 +438,19 @@ public class MyPanel extends MyUtill {
 		}
 	}
 
-	private boolean wallCheck(int xx, int yy) {
-		if (map[yy][xx] == wall2) {
-			return false;
-		} else {
-			return true;
-		}
-
-	}
-
 	@Override
 	public void keyReleased(KeyEvent e) {
 		super.keyReleased(e);
-		if (e.getKeyCode() == e.VK_RIGHT) {
-			right = false;
-		} else if (e.getKeyCode() == e.VK_LEFT) {
-			left = false;
-		} else if (e.getKeyCode() == e.VK_UP) {
-			up = false;
-		} else if (e.getKeyCode() == e.VK_DOWN) {
-			down = false;
+		if (!win) {
+			if (e.getKeyCode() == e.VK_RIGHT) {
+				right = false;
+			} else if (e.getKeyCode() == e.VK_LEFT) {
+				left = false;
+			} else if (e.getKeyCode() == e.VK_UP) {
+				up = false;
+			} else if (e.getKeyCode() == e.VK_DOWN) {
+				down = false;
+			}
 		}
 	}
 
