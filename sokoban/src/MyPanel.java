@@ -243,8 +243,6 @@ public class MyPanel extends MyUtill {
 				for (int i = 0; i < map.length; i++) {
 					for (int j = 0; j < map[i].length; j++) {
 						if (map[i][j] == tile2) {
-//							tile[x].setY(i);
-//							tile[x].setX(j);
 							g.drawImage(temp.getImage().getImage(), j * 50, i * 50, null);
 						}
 					}
@@ -277,8 +275,6 @@ public class MyPanel extends MyUtill {
 		for (int i = 0; i < map.length; i++) {
 			for (int j = 0; j < map[i].length; j++) {
 				if (map[i][j] == me2) {
-					me.setY(i);
-					me.setX(j);
 					g.drawImage(me.getImage().getImage(), j * 50, i * 50, null);
 				}
 			}
@@ -286,14 +282,18 @@ public class MyPanel extends MyUtill {
 
 		requestFocusInWindow();
 		repaint();
-
+//		for (int i = 0; i < map.length; i++) {
+//			for (int j = 0; j < map[i].length; j++) {
+//				System.out.print(map[i][j] + " ");
+//			}
+//			System.out.println();
+//		}
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
 		super.keyPressed(e);
 		if (!win) {
-			System.out.println("1");
 			if (e.getKeyCode() == e.VK_RIGHT) {
 				right = true;
 			} else if (e.getKeyCode() == e.VK_LEFT) {
@@ -306,6 +306,7 @@ public class MyPanel extends MyUtill {
 
 			moveCheck();
 			winCheck();
+			
 		}
 	}
 
@@ -329,7 +330,7 @@ public class MyPanel extends MyUtill {
 	private void moveCheck() {
 		int xx = me.getX();
 		int yy = me.getY();
-		boolean move = false;
+		 move = true;
 		boolean check = false;
 		if (right) {
 			xx++;
@@ -341,16 +342,7 @@ public class MyPanel extends MyUtill {
 			yy++;
 		}
 
-		if (pointCheck(xx, yy)) {
-			pointCheck = true;
-			map[me.getY()][me.getX()] = tile2;
-			map[yy][xx] = me2;
-		} 
-		else {
-			System.out.println(pointCheck);
 
-			move = true;
-		}
 
 		if (boxCheck(xx, yy)) {
 			int ballY = yy;
@@ -386,7 +378,6 @@ public class MyPanel extends MyUtill {
 			}
 			if (move) {
 				if (map[ballY][ballX] == point2) {
-					System.out.println("Æ÷ÀÎÆ®");
 					map[ballY][ballX] = onbox2;
 				} else {
 					map[ballY][ballX] = box2;
@@ -401,37 +392,15 @@ public class MyPanel extends MyUtill {
 			move = false;
 		}
 		if (move) {
-			if (pointCheck) {
-				pointCheck = false;
-				map[me.getY()][me.getX()] = point2;
-			} else {
-				if (check) {
-					pointCheck = true;
-				}
-				map[me.getY()][me.getX()] = tile2;
-			}
+			map[me.getY()][me.getX()] = tile2;
+			me.setY(yy);
+			me.setX(xx);
 			map[yy][xx] = me2;
 		}
-
-		for (int i = 0; i < map.length; i++) {
-			for (int j = 0; j < map[i].length; j++) {
-				System.out.print(map[i][j] + " ");
-			}
-			System.out.println();
-		}
-
 	}
 
 	private boolean boxCheck(int xx, int yy) {
 		if (map[yy][xx] == box2 || map[yy][xx] == onbox2) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	private boolean pointCheck(int xx, int yy) {
-		if (map[yy][xx] == point2) {
 			return true;
 		} else {
 			return false;
