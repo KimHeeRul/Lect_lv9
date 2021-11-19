@@ -13,5 +13,6 @@ public class frame1 extends JFrame{
 		setVisible(true);
 		revalidate();
 		
+		
 	}
 }

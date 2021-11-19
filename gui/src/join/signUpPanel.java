@@ -10,12 +10,7 @@ import javax.swing.JTextField;
 
 public class signUpPanel extends MyUtill {
 	// 줄바꿈 불가
-	private signUpFrame sg =signUpFrame.sg;
 	JButton singUp = new JButton();
-	JTextField id = new JTextField();
-	JTextField pw = new JTextField();
-	JTextField name = new JTextField();
-	JTextField age = new JTextField();
 
 	JTextField jf[] = new JTextField[4];
 	// 나중에 줄이자
@@ -23,8 +18,6 @@ public class signUpPanel extends MyUtill {
 	JLabel l2 = new JLabel("PW");
 	JLabel l3 = new JLabel("NAME");
 	JLabel l4 = new JLabel("AGE");
-
-	JLabel lb[] = new JLabel[4];
 
 	public signUpPanel() {
 		setLayout(null);
@@ -88,8 +81,9 @@ public class signUpPanel extends MyUtill {
 			if (signUp()) {
 				JOptionPane.showMessageDialog(null, "회원가입성공!");
 				file.save();
+				//회원가입끝
 			} else {
-				JOptionPane.showMessageDialog(null, "회원가입 실패 중복된 아이디입니다.");
+				JOptionPane.showMessageDialog(null, "회원가입 실패 .");
 //				new result(false);
 			}
 		}
@@ -100,10 +94,13 @@ public class signUpPanel extends MyUtill {
 		boolean check = false;
 		for (int i = 0; i < file.users.size(); i++) {
 			if (file.users.get(i).get(0).equals(jf[0].getText())) {
-				System.out.println("중복");
 				check = true;
 			}
 		}
+		if (jf[0].getText().isEmpty()) {
+			check = true;
+		}
+		
 		if (!check) {
 			file.users.add(new Vector<String>());
 			file.users.get(file.users.size() - 1).add(jf[0].getText());

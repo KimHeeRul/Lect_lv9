@@ -18,7 +18,6 @@ public class file {
 			text += users.get(i).get(1) + "/";
 			text += users.get(i).get(2) + "/";
 			text += users.get(i).get(3) + "/";
-			System.out.println(users.get(i).get(0));
 			text += "\n";
 		}
 
@@ -48,9 +47,9 @@ public class file {
 					text += "\n";
 				}
 			}
-			if (text != null) {
 
 				String arr[] = text.split("\n");
+				if (!arr[0].isEmpty()) {
 				for (int i = 0; i < arr.length; i++) {
 					String arr2[] = arr[i].split("/");
 					users.add(new Vector<String>());

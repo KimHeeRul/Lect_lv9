@@ -13,11 +13,8 @@ public class panel1 extends MyUtill {
 	JButton load = new JButton();
 	JLabel log = new JLabel();
 
-	// ¡ŸπŸ≤ﬁ ∫“∞°
 	JTextField jf = new JTextField();
 
-	// ¡ŸπŸ≤ﬁ ∞°¥…
-//	JTextArea ja = new JTextArea();
 	public panel1() {
 		setLayout(null);
 		setBounds(0, 0, 400, 500);
@@ -25,9 +22,7 @@ public class panel1 extends MyUtill {
 		setsignIn();
 		setload();
 		serLabel();
-//		setTextField();
 		revalidate();
-//		setTextArea();
 
 	}
 
@@ -61,19 +56,19 @@ public class panel1 extends MyUtill {
 		add(login);
 	}
 
-	private void setTextField() {
-		jf.setBounds(100, 100, 100, 30);
-		add(jf);
-	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		super.actionPerformed(e);
 		if (e.getSource() == login) {
 			new loginFrame();
-		} else if (e.getSource() == signIn) {
+		}
+		if (e.getSource() == signIn) {
 			new signUpFrame();
-		} else if (e.getSource() == load) {
+		} 
+		if (e.getSource() == load)
+
+		{
 			file.load();
 			frame1.log = -1;
 		}
