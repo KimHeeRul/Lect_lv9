@@ -12,7 +12,5 @@ public class frame1 extends JFrame{
 		add(new panel1());
 		setVisible(true);
 		revalidate();
-		
-		
 	}
 }

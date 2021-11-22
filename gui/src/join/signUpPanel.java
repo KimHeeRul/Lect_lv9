@@ -81,6 +81,7 @@ public class signUpPanel extends MyUtill {
 			if (signUp()) {
 				JOptionPane.showMessageDialog(null, "회원가입성공!");
 				file.save();
+				panel1.signUpFrame.dispose();
 				//회원가입끝
 			} else {
 				JOptionPane.showMessageDialog(null, "회원가입 실패 .");

@@ -16,6 +16,7 @@ public class loginPanel extends MyUtill {
 	JLabel l1 = new JLabel("ID");
 	JLabel l2 = new JLabel("PW");
 
+	
 	public loginPanel() {
 		setLayout(null);
 		setBounds(0, 0, 400, 500);
