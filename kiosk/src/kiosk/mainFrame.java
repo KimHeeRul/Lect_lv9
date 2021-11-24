@@ -1,15 +1,20 @@
 package kiosk;
 
-public class mainFrame extends MyUtill
-{
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class mainFrame extends JFrame {
 
 	public static int log = -1;// 관리자 일반사용자 구분
 
 	public mainFrame() {
 		setLayout(null);
-		setBounds(100, 100, 400, 500);
-		add(new mainPanel());
+		setBounds(100, 100, 500, 800);
+		JPanel mainPanel=new mainPanel();
+		add(mainPanel);
+//		mainPanel.add(new subPanel());
 		setVisible(true);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		revalidate();
 	}
 
