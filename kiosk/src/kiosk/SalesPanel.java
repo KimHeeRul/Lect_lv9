@@ -57,8 +57,6 @@ public class SalesPanel extends MyUtill {
 		setTable();
 
 		setLabel();
-//		setImage();
-//		setButton();
 		revalidate();
 
 	}
@@ -81,15 +79,6 @@ public class SalesPanel extends MyUtill {
 
 	}
 
-	private void setImage(int i) {
-		this.fileName = String.format("images/coffee_sub%02d.png", i + 1);
-		this.image = new ImageIcon(
-				new ImageIcon(this.fileName).getImage().getScaledInstance(130, 130, Image.SCALE_SMOOTH));
-
-		this.fileName = String.format("images/coffee_sub%02d.png", i + 1);
-		addImage = new ImageIcon(new ImageIcon("images/coffee_sub01.png").getImage());
-
-	}
 
 	private void setLabel() {
 		for (int i = 0; i < mainPanel.saleslist.size(); i++) {

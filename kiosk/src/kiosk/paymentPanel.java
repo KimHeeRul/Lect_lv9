@@ -139,7 +139,7 @@ public class paymentPanel extends MyUtill {
 
 			oddlist3.add(new JLabel());
 			oddlist3.get(i).setBounds(x + 260, y, 80, 50);
-			oddlist3.get(i).setText(mainPanel.result.get(i).getPrice() * mainPanel.result.get(i).getNum() + "");
+			oddlist3.get(i).setText((mainPanel.result.get(i).getPrice()+addlistPopupPanel.sizePay) * mainPanel.result.get(i).getNum() + "");
 			oddlist3.get(i).setFont(new Font("nanumBunyuk", Font.BOLD, 18));
 			oddlist3.get(i).setForeground(Color.black);
 			oddlist3.get(i).setHorizontalAlignment(JLabel.RIGHT);
@@ -180,9 +180,8 @@ public class paymentPanel extends MyUtill {
 			for (int i = 0; i < mainPanel.result.size(); i++) {
 				String name = mainPanel.result.get(i).getName();
 				String num = mainPanel.result.get(i).getNum() + "";
-				String price = mainPanel.result.get(i).getPrice()*mainPanel.result.get(i).getNum() + "";
+				String price = (mainPanel.result.get(i).getPrice()+addlistPopupPanel.sizePay)*mainPanel.result.get(i).getNum() + "";
 				mainPanel.saleslist.add(new Vector<String>());
-//				mainPanel.saleslist.add(new Sales(price, name, num));
 				mainPanel.saleslist.get(mainPanel.saleslist.size()-1).add(name);
 				mainPanel.saleslist.get(mainPanel.saleslist.size()-1).add(num);
 				mainPanel.saleslist.get(mainPanel.saleslist.size()-1).add(price);

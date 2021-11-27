@@ -9,7 +9,7 @@ public class mainFrame extends JFrame {
 
 	public mainFrame() {
 		setLayout(null);
-		setBounds(100, 100, 500, 800);
+		setBounds(100, 100, 515, 800);
 		JPanel mainPanel=new mainPanel();
 		add(mainPanel);
 //		mainPanel.add(new subPanel());

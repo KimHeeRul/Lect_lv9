@@ -4,7 +4,7 @@ import java.awt.Image;
 
 import javax.swing.ImageIcon;
 
-public class Drink {
+public class Drink2 {
 	private int price;
 	private String name;
 	private String fileName;
@@ -13,10 +13,10 @@ public class Drink {
 	private ImageIcon image2;
 	private int num;
 
-	public Drink(int price, String name, int num,String path) {
+	public Drink2(int price, String name, int num) {
 		this.name = name;
 		this.price = price;
-		this.fileName = String.format(path+"%02d.png", num+1);
+		this.fileName = String.format("images/tea_sub%02d.png", num+1);
 //		this.fileName2 = String.format("images/coffee%02d.png", this.num);
 		this.image = new ImageIcon(new ImageIcon(this.fileName).getImage().getScaledInstance(140, 140,Image.SCALE_SMOOTH));
 //		this.image2 = new ImageIcon(new ImageIcon(this.fileName2).getImage());
