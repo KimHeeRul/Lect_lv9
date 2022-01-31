@@ -49,7 +49,7 @@ public class addlistPopupPanel extends MyUtill {
 
 	public addlistPopupPanel(int i, Drink drink, String path) {
 		setLayout(null);
-		setBounds(0, 0, 400, 650);
+		setBounds(0, 0, 400, 325);
 		setVisible(true);
 		setBackground(Color.white);
 		this.drink = drink;
@@ -84,6 +84,7 @@ public class addlistPopupPanel extends MyUtill {
 		su.setBounds(220, 70, 50, 50);
 		su.setText(num + "");
 		add(su);
+	
 		pay.setLayout(null);
 		pay.setBounds(300, 70, 50, 50);
 		pay.setText(drink.getPrice() + "");
@@ -98,27 +99,27 @@ public class addlistPopupPanel extends MyUtill {
 		name.setForeground(new Color(125, 79, 65));
 		add(name);
 
-		text.setLayout(null);
-		text.setText("사이즈를 선택하세요");
-		text.setBounds(10, 120, 200, 100);
-		text.setFont(new Font("nanumBunyuk", Font.BOLD, 20));
-		text.setForeground(new Color(125, 79, 65));
-		add(text);
-	
-		
-		text3.setLayout(null);
-		text3.setText("S");
-		text3.setBounds(30, 170, 100, 100);
-		text3.setFont(new Font("nanumBunyuk", Font.BOLD, 30));
-		text3.setForeground(Color.white);
-		add(text3);
-
-		text4.setLayout(null);
-		text4.setText("L");
-		text4.setBounds(115, 170, 100, 100);
-		text4.setFont(new Font("nanumBunyuk", Font.BOLD, 30));
-		text4.setForeground(Color.white);
-		add(text4);
+//		text.setLayout(null);
+//		text.setText("사이즈를 선택하세요");
+//		text.setBounds(10, 120, 200, 100);
+//		text.setFont(new Font("nanumBunyuk", Font.BOLD, 20));
+//		text.setForeground(new Color(125, 79, 65));
+//		add(text);
+//	
+//		
+//		text3.setLayout(null);
+//		text3.setText("S");
+//		text3.setBounds(30, 170, 100, 100);
+//		text3.setFont(new Font("nanumBunyuk", Font.BOLD, 30));
+//		text3.setForeground(Color.white);
+//		add(text3);
+//
+//		text4.setLayout(null);
+//		text4.setText("L");
+//		text4.setBounds(115, 170, 100, 100);
+//		text4.setFont(new Font("nanumBunyuk", Font.BOLD, 30));
+//		text4.setForeground(Color.white);
+//		add(text4);
 		
 //
 //		text2.setLayout(null);
@@ -134,7 +135,7 @@ public class addlistPopupPanel extends MyUtill {
 
 		addlist = new JButton();
 		addlist.setLayout(null);
-		addlist.setBounds(210, 530, 160, 50);
+		addlist.setBounds(210, 220, 160, 50);
 		addlist.setText("주문담기");
 		addlist.setBackground(new Color(230, 0, 65));
 		addlist.setFont(new Font("nanumBunyuk", Font.BOLD, 18));
@@ -144,7 +145,7 @@ public class addlistPopupPanel extends MyUtill {
 
 		cancle = new JButton();
 		cancle.setLayout(null);
-		cancle.setBounds(20, 530, 160, 50);
+		cancle.setBounds(20, 220, 160, 50);
 		cancle.setText("취소");
 		cancle.setBackground(new Color(65, 65, 65));
 		cancle.setFont(new Font("nanumBunyuk", Font.BOLD, 18));
@@ -164,19 +165,19 @@ public class addlistPopupPanel extends MyUtill {
 		minus.addActionListener(this);
 		add(minus);
 
-		sizedefault = new JButton();
-		sizedefault.setLayout(null);
-		sizedefault.setBounds(20, 195, 45, 45);
-		sizedefault.setBackground(new Color(13,40,127));
-		sizedefault.addActionListener(this);
-		add(sizedefault);
-
-		sizeup = new JButton();
-		sizeup.setLayout(null);
-		sizeup.setBackground(new Color(13,40,127));
-		sizeup.setBounds(100, 195, 45, 45);
-		sizeup.addActionListener(this);
-		add(sizeup);
+//		sizedefault = new JButton();
+//		sizedefault.setLayout(null);
+//		sizedefault.setBounds(20, 195, 45, 45);
+//		sizedefault.setBackground(new Color(13,40,127));
+//		sizedefault.addActionListener(this);
+//		add(sizedefault);
+//
+//		sizeup = new JButton();
+//		sizeup.setLayout(null);
+//		sizeup.setBackground(new Color(13,40,127));
+//		sizeup.setBounds(100, 195, 45, 45);
+//		sizeup.addActionListener(this);
+//		add(sizeup);
 		
 		
 		
@@ -252,10 +253,10 @@ public class addlistPopupPanel extends MyUtill {
 
 		g.setColor(new Color(232, 230, 226));
 		g.fillRect(0, 150, 400, 40);
-
-		g.fillRect(0, 280, 400, 40);
-
-		g.fillRect(0, 410, 400, 40);
+//
+//		g.fillRect(0, 280, 400, 40);
+//
+//		g.fillRect(0, 410, 400, 40);
 
 //		int x=20;
 //		int y=195;

@@ -13,7 +13,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 
 import drink.Drink;
-import drink.Sales;
 
 public class paymentPanel extends MyUtill {
 	// 결제관련
@@ -24,8 +23,11 @@ public class paymentPanel extends MyUtill {
 
 	JButton odder = null;// 추후이미지 대체//이미지 아이콘 인자
 	JButton cancle = null;
-	JButton plus = null;
-	JButton minus = null;
+//	JButton plus = null;
+//	JButton minus = null;
+	JButton next = null;
+	JButton prev = null;
+
 	// 주문라벨
 	JLabel text = new JLabel();
 	JLabel text2 = new JLabel();
@@ -45,7 +47,16 @@ public class paymentPanel extends MyUtill {
 	String fileName;
 	Drink drink;
 
+	int size = 0;
+	int start = 0;
+
 	public paymentPanel(Vector result) {
+
+		if (mainPanel.result.size() >= 5) {
+			size = 5;
+		} else {
+			size = mainPanel.result.size();
+		}
 		setLayout(null);
 		setBounds(0, 0, 400, 650);
 		setVisible(true);
@@ -119,9 +130,21 @@ public class paymentPanel extends MyUtill {
 //		oddlist.setForeground(Color.black);
 //		add(oddlist);
 
+		setList();
+
+//		JScrollPane js = new JScrollPane(oddlist);
+//		js.setBounds(-1, 182, 398, 250);
+//		js.setAutoscrolls(true);
+//		add(js);
+
+	}
+
+	private void setList() {
 		int x = 10;
 		int y = 180;
-		for (int i = 0; i < mainPanel.result.size(); i++) {
+
+		for (int i = start; i < size; i++) {
+
 			oddlist.add(new JLabel());
 			oddlist.get(i).setBounds(x, y, 250, 50);
 			oddlist.get(i).setText(mainPanel.result.get(i).getName());
@@ -139,7 +162,9 @@ public class paymentPanel extends MyUtill {
 
 			oddlist3.add(new JLabel());
 			oddlist3.get(i).setBounds(x + 260, y, 80, 50);
-			oddlist3.get(i).setText((mainPanel.result.get(i).getPrice()+addlistPopupPanel.sizePay) * mainPanel.result.get(i).getNum() + "");
+			oddlist3.get(i).setText(
+					(mainPanel.result.get(i).getPrice() + addlistPopupPanel.sizePay) * mainPanel.result.get(i).getNum()
+							+ "");
 			oddlist3.get(i).setFont(new Font("nanumBunyuk", Font.BOLD, 18));
 			oddlist3.get(i).setForeground(Color.black);
 			oddlist3.get(i).setHorizontalAlignment(JLabel.RIGHT);
@@ -147,15 +172,6 @@ public class paymentPanel extends MyUtill {
 
 			y += 40;
 		}
-
-		for (int i = 0; i < mainPanel.result.size(); i++) {
-			System.out.println("2");
-		}
-
-//		JScrollPane js = new JScrollPane(oddlist);
-//		js.setBounds(-1, 182, 398, 250);
-//		js.setAutoscrolls(true);
-//		add(js);
 
 	}
 
@@ -171,6 +187,26 @@ public class paymentPanel extends MyUtill {
 		odder.addActionListener(this);
 		add(odder);
 
+		prev = new JButton(addImage);
+		prev.setLayout(null);
+		prev.setBounds(20, 380, 50, 40);
+		prev.setText("<");
+		prev.setBackground(new Color(210, 0, 60));
+		prev.setFont(new Font("nanumBunyuk", Font.PLAIN, 20));
+		prev.setForeground(Color.white);
+		prev.addActionListener(this);
+		add(prev);
+
+		next = new JButton(addImage);
+		next.setLayout(null);
+		next.setBounds(320, 380, 50, 40);
+		next.setText(">");
+		next.setBackground(new Color(210, 0, 60));
+		next.setFont(new Font("nanumBunyuk", Font.PLAIN, 20));
+		next.setForeground(Color.white);
+		next.addActionListener(this);
+		add(next);
+
 	}
 
 	@Override
@@ -180,18 +216,38 @@ public class paymentPanel extends MyUtill {
 			for (int i = 0; i < mainPanel.result.size(); i++) {
 				String name = mainPanel.result.get(i).getName();
 				String num = mainPanel.result.get(i).getNum() + "";
-				String price = (mainPanel.result.get(i).getPrice()+addlistPopupPanel.sizePay)*mainPanel.result.get(i).getNum() + "";
+				String price = (mainPanel.result.get(i).getPrice() + addlistPopupPanel.sizePay)
+						* mainPanel.result.get(i).getNum() + "";
 				mainPanel.saleslist.add(new Vector<String>());
-				mainPanel.saleslist.get(mainPanel.saleslist.size()-1).add(name);
-				mainPanel.saleslist.get(mainPanel.saleslist.size()-1).add(num);
-				mainPanel.saleslist.get(mainPanel.saleslist.size()-1).add(price);
+				mainPanel.saleslist.get(mainPanel.saleslist.size() - 1).add(name);
+				mainPanel.saleslist.get(mainPanel.saleslist.size() - 1).add(num);
+				mainPanel.saleslist.get(mainPanel.saleslist.size() - 1).add(price);
 			}
 			mainPanel.result.clear();
 			addlistPopupPanel.result.clear();
 			mainPanel.cnt = 0;
 			mainPanel.priceAll = 0;
 			mainPanel.paymentFrame.dispose();
+
+		} else if (e.getSource() == next && size <= 5 && size < mainPanel.result.size()) {
+			start += 5;
+			if (mainPanel.result.size() - start > 5) {
+				size += 5;
+			} else {
+				size += mainPanel.result.size() - start;
+			}
+
+			System.out.println(start);
+			setList();
+		} else if (e.getSource() == prev && start >= 5) {
+			start -= 5;
 			
+			size=5;
+
+			System.out.println(start);
+			System.out.println(size);
+			setList();
+			//라벨 지우는거해야함
 		}
 
 		repaint();

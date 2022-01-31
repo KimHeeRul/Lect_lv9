@@ -12,7 +12,7 @@ public class addlistPopupFrame extends JFrame {
 
 	public addlistPopupFrame(int i, Drink drink,String path) {
 		setLayout(null);
-		setBounds(150, 150, 400, 650);
+		setBounds(150, 150, 400, 350);
 		this.popupPanel = new addlistPopupPanel(i, drink,path);
 		add(popupPanel);
 		setVisible(true);

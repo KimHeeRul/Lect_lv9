@@ -148,7 +148,7 @@ public class MyPanel extends MyUtill {
 		int x = 0;
 		for (int i = 0; i < map.length; i++) {
 			for (int j = 0; j < map[i].length; j++) {
-				if (map[i][j] == point2) {
+				if (map[i][j] == point2||map[i][j]==onbox2) {
 					point[x] = new Point(j, i, "tile5");
 					Checkpoint[i][j] = 1;
 					x++;
