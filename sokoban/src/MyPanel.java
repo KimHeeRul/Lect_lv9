@@ -156,6 +156,7 @@ public class MyPanel extends MyUtill {
 					Checkpoint[i][j] = 0;
 				}
 			}
+			
 		}
 		for (int i = 0; i < Checkpoint.length; i++) {
 			for (int j = 0; j < Checkpoint[i].length; j++) {
