@@ -11,7 +11,7 @@
 </head>
 <%
 session.setAttribute("page", 0);   
-//체크
+//체크 
 %>
    
 <body>
