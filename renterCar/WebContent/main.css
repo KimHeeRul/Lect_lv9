@@ -1,0 +1,162 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+@import
+	url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');
+
+.wrap {
+	display: grid;
+	width: 100vw;
+	height: 100vh;
+	grid-template-columns: repeat(4, 1fr);
+	grid-template-rows: 1fr 6fr 1fr;
+	grid-template-areas: 
+	"header header header  header   "
+		" main main main main "
+		 "footer footer footer  footer  ";
+}
+
+
+header {
+	grid-area: header;
+	display: grid;
+	grid-template-areas: "util util" "logo nav";
+}
+
+.util {
+	grid-area: util;
+	margin-left: 20%;
+}
+
+#logo {
+	grid-area: logo;
+	margin: auto;
+}
+
+footer {
+	grid-area: footer;
+	background-color: #f8f9fa;
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-areas: "sec4  ";
+}
+
+section#sec4 {
+	margin: auto;
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: 1fr;
+	grid-template-areas: "arti12"
+}
+
+#arti12 {
+	grid-area: arti12;
+	min-width:1400px;
+	
+
+}
+
+nav#nav {
+	color: black;
+	margin-left: 10%;
+	margin-top: 2%;
+	margin-bottom: 2%;
+	font-family: 'Do Hyeon', sans-serif;
+	font-weight: bold;
+	font-size: 2em;
+	grid-area: nav;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	grid-template-areas: "text1 text2 text3 text4";
+}
+
+main#main {
+	grid-area: main;
+	display: grid;
+	/* grid-template:
+    auto/1fr 1fr 1fr; */
+	grid-template-columns: 1fr repeat(3, 1fr) 1fr;
+	grid-template-rows: 9fr;
+	grid-template-areas: " aside sec1 sec2 sec3 aside2";
+}
+
+aside {
+	grid-area: aside;
+	display: grid;
+}
+
+aside2 {
+	grid-area: aside2;
+	display: grid;
+}
+
+footer {
+	grid-area: footer;
+}
+
+section#sec1 {
+	grid-area: sec1;
+	margin-left: 3%;
+	background-color: #f93240;
+	color: white;
+	font-size: 1.5em;
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: 3fr 3fr 3fr;
+	grid-template-areas: "arti1" "arti2" "arti3"
+}
+
+#arti1 {
+	grid-area: arti1;
+}
+
+#button {
+	margin-top: 10%;
+	background-color: #555555;
+	width: 100%;
+	height: 20%;
+	font-size: 100%;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	font-weight: bold;
+	color: white;
+}
+
+#arti2 {
+	grid-area: arti2;
+}
+
+#arti3 {
+	grid-area: arti3;
+}
+
+#text {
+	font-size: 0.8em;
+}
+
+#text2 {
+	font-size: 1em;
+}
+
+section#sec2 {
+	grid-area: sec2;
+	color: black;
+	font-size: 1.5em;
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: 3fr 3fr 3fr;
+	grid-template-areas: "arti4" "arti5" "arti6"
+}
+
+section#sec3 {
+	grid-area: sec3;
+	margin-right: 3%;
+	display: grid;
+	grid-template: 2fr 1fr 1fr 1fr 1fr/auto;
+}
+
+a {
+	color: black;
+	text-decoration-line: none;
+}

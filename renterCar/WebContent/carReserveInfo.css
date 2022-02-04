@@ -1,0 +1,45 @@
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+@import
+	url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');
+
+#info {
+	grid-area: main;
+	display: grid;
+	/* grid-template:
+    auto/1fr 1fr 1fr; */
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-rows: auto 2fr 1fr;
+	grid-template-areas: "nav nav nav" "aside infoDiv aside2"
+		"nav2 nav2 nav2";
+}
+
+#infoDiv {
+	grid-area: infoDiv;
+	display: grid;
+}
+
+#infoNav {
+	grid-area: nav;
+	display: grid;
+	text-align: center;
+	justify-content: center;
+}
+
+#infoNav2 {
+	grid-area: nav2;
+	display: grid;
+}
+
+#aside {
+	grid-area: aside;
+	display: grid;
+}
+
+#aside2 {
+	grid-area: aside2;
+	display: grid;
+}
