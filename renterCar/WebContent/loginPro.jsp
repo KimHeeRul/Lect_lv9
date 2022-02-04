@@ -11,7 +11,7 @@ String pw = request.getParameter("pw");
 
 UserDAO dao = UserDAO.getInstance();
 ArrayList<UserDTO> datas = dao.getUsers();
-
+ 
 int cnt = 0;
 for (UserDTO user : datas) {
 	if (id.equals(user.getId())&&pw.equals(user.getPw())) {

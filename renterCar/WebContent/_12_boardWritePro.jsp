@@ -11,7 +11,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%
+<% 
 String log = (String) session.getAttribute("id");
 
 request.setCharacterEncoding("utf-8");

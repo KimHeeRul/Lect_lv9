@@ -11,7 +11,7 @@ BoardDTO board = dao.getBoard(no);
 dao.delete(no);
 %>
 <script type="text/javascript">
-	alert("삭제가 완료됐습니다.")
+	alert("삭제가 완료됐습니다.") 
 </script>
 
 <%

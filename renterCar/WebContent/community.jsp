@@ -16,7 +16,7 @@
 	}
 </script>
 <%
-BoardDAO dao = BoardDAO.getInstance();
+BoardDAO dao = BoardDAO.getInstance(); 
 ArrayList<BoardDTO> datas = dao.getBoard();
 
 int pagelimit = 10;

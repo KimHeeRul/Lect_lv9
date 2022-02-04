@@ -20,7 +20,7 @@ if (id == null) {
 <script type="text/javascript">
 	alert("로그인 이후 이용가능합니다.")
 	location.href = "login.jsp";
-</script>
+</script> 
 <%
 }
 %>

@@ -17,7 +17,7 @@
 	crossorigin="anonymous">
 <link rel="stylesheet" href="reservation.css" type="text/css">
 </head>
-<%
+<% 
 DBManager.getConnection();
 CarDAO dao = CarDAO.getInstance();
 ArrayList<CarDTO> list = dao.getNewCars();

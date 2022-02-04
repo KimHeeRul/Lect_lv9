@@ -20,7 +20,7 @@ ArrayList<CarReserve> list = CarDAO.getInstance().getReservelist(id);
 
 
 
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html>
 <head>
 <meta charset="UTF-8">

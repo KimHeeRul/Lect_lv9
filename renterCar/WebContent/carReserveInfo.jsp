@@ -19,7 +19,7 @@ if (category == 1) {
 System.out.print(car.getImg());
 %>
 
-
+ 
 <!DOCTYPE html>
 <html>
 <head>

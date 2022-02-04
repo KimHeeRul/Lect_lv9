@@ -14,7 +14,7 @@ dao.like(cnt,no);
 <script type="text/javascript">
 	alert("추천했습니다.")
 	history.back();
-</script>
+</script> 
 
 <html>
 <head>

@@ -14,7 +14,7 @@ BoardDAO dao = BoardDAO.getInstance();
 no = Integer.parseInt(request.getParameter("getCode"));
 if (no == 0) {
 %>
-<script>
+<script> 
 	alert("잘못된 경로입니다.");
 	history.back();
 </script>
