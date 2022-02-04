@@ -1,0 +1,7 @@
+101475/
+호랑이/4/96/133/10/5/9/true/null/null/null/
+강아지/4/62/105/7/3/9/true/null/null/null/
+사슴/4/24/66/3/1/9/true/null/null/null/
+두더지/4/53/92/5/2/9/true/null/null/null/
+돼지/1/200/200/4/8/0/false/null/null/null/
+사자/1/120/120/11/7/0/false/null/null/null/
