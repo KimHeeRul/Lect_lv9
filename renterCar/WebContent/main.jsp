@@ -11,7 +11,7 @@
 </head>
 <%
 session.setAttribute("page", 0);
-%>
+%>   
 <body>
     <div class="wrap">
     <!--top-->
