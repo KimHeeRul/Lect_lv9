@@ -10,8 +10,10 @@
     <link rel="stylesheet"  href="main.css" type="text/css">
 </head>
 <%
-session.setAttribute("page", 0);
-%>   
+session.setAttribute("page", 0);   
+//체크
+%>
+   
 <body>
     <div class="wrap">
     <!--top-->
