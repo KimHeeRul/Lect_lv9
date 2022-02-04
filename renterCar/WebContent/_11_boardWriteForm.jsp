@@ -8,7 +8,7 @@
 <script type="text/javascript" src="validation.js"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-<link rel="stylesheet" href="board.css" type="text/css">
+<link rel="stylesheet" href="board.css" type="text/css"> 
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
