@@ -1,0 +1,98 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+
+body{
+    /* background-image: url(https://images.pexels.com/photos/1257860/pexels-photo-1257860.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260); */
+    /* background-size: 100% 100%  ; */
+    /* background-repeat: no-repeat; */
+    background-color: #18181b;
+    background-size: cover;
+    /* background-position: center;
+    position:relative */
+    
+}
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');
+
+.wrap{
+    display: grid;
+    width: 100%;
+    height: 100vh;
+    grid-template-columns: 1fr;
+    grid-template-rows: 50px 8fr 1fr;
+    grid-template-areas: 
+    "header "
+    "main "
+    "footer ";
+}
+header{
+    grid-area: header;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-template-areas: 
+    "logo menu"
+    ;
+    background-color: black;
+}
+#logo{
+    margin-left: 10%;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+#menu{
+    font-weight: bold;
+    font-size: 16px;
+    color: white;
+    text-align: left;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+main{
+    color: white;
+    grid-area: main;
+    display: grid;
+    grid-template-areas: 
+    "sec1"
+    "sec2"
+    ;
+    justify-content: center;
+}
+
+#sec2{
+    grid-area: sec2;
+    display: grid;
+    grid-template-areas: 
+    "list"
+    ;
+}
+#list{
+    grid-area: list;
+    justify-content: right;
+    /* align-items: flex-end; */
+}
+
+
+
+/* .................................. */
+table {
+    /* width: 100%; */
+    border-top: 1px solid white;
+    border-collapse: collapse;
+  }
+td,th {
+    border-bottom: 1px solid white;
+    padding: 10px;
+  }
+
+#market{
+    color: gray;
+}
+
+a {
+    color: white;
+    text-decoration-line:none;
+} 
+a:hover { color: white; text-decoration: none;}

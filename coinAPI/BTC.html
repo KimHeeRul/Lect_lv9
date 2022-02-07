@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <link rel="stylesheet" href="BTC.css" type="text/css">
+
+   
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <h1 id=logo style="color: #fbbf24;">BTCKIM</h1>
+
+      <!-- <sapn id=menu><a href="BTC.html">홈</a> <a href="BTC2.html">| 시가총액</a></sapn> -->
+      <sapn id=menu><a href="BTC.html">홈</a></sapn>
+    </header>
+
+    <main>
+      <section id=sec1>
+        <article>
+          차트
+        </article>
+      </section>
+      <section id=sec2>
+        <article id=list>
+          <th colspan="5">
+            <nav class="navbar navbar-dark ">
+              <div class="container-fluid">
+                <div class="d-flex">
+                  <input class="form-control me-2 btn-sm" type="search" id="searchText" placeholder="BTC,비트코인" aria-label="Search">
+                  <button class="btn btn-outline-success  btn-sm " type="button" id="search" onclick="func2(searchText.value)">Search</button>
+                </div>
+              </div>
+            </nav>
+          </th>
+          <table id="table" style="width:1000px;" >
+        
+        
+
+            <tr>
+              <td>이름</td>
+              <td>현재가</td>
+              <td>전일대비</td>
+              <td>거래액(일)</td>
+              <td>정보</td>
+            </tr>
+            <!-- <tr>
+            <td>이름</td> 
+            <td>현재가</td> 
+            <td>전일대비</td> 
+            <td>거래액(일)</td>  
+            <td>정보</td> 
+        </tr> -->
+          </table>
+        </article>
+
+
+      </section>
+
+    </main>
+
+    <footer>
+
+    </footer>
+  </div>
+
+
+
+  <script>
+    $('#searchText').keypress(function(e){
+            if (e.keyCode === 13) {
+            $("#search").trigger('click');
+        }
+        });
+
+        let keyword="KRW"
+function func2(searchText) {
+  keyword =searchText;
+  
+
+}
+
+    //비트코인 종목 갱신
+      var repeat=setInterval(function () {
+        const options = { method: 'GET', headers: { Accept: 'application/json' } };
+        fetch('https://api.upbit.com/v1/market/all?isDetails=false', options).then(response => response.json())
+          .then(response => func(response))
+          .catch(err => console.error(err));},500);
+
+    // $(document).ready(function(){
+    //   alert(1);
+    // });
+
+    $(document).ready(function () {
+
+      const options = { method: 'GET', headers: { Accept: 'application/json' } };
+      fetch('https://api.upbit.com/v1/market/all?isDetails=false', options)
+        .then(response => response.json())
+        .then(response => func(response))
+        .catch(err => console.error(err));
+    });
+
+
+    function func(response) {
+      let arr_krw_markets = ""
+      for (let index = 0; index < response.length; index++) {
+        if (response[index].market.indexOf(keyword) > -1||response[index].korean_name.indexOf(keyword) > -1) {
+
+          arr_krw_markets += response[index].market + (",");
+        }
+
+      }
+
+      arr_krw_markets = arr_krw_markets.substring(0, arr_krw_markets.length - 1);
+
+
+      // console.log(arr_krw_markets)
+
+      // console.log(arr_krw_markets2)
+
+
+      $.ajax({
+        url: "https://api.upbit.com/v1/ticker?markets=" + arr_krw_markets,
+        dataType: "json"
+
+      }).done(function (tickers) {
+        $("#table > tbody > tr").remove();
+        let cnt = 0;
+        console.log(tickers)
+        const str = `
+        <tr>
+              <td style="width:300px;">이름</td>
+              <td style="width:300px;">현재가</td>
+              <td style="width:300px;">전일대비</td>
+              <td style="width:150px;">거래액(일)</td>
+            </tr>`
+            $('#table> tbody:last').append(str);
+        for (let index = 0; index < response.length; index++) {
+          // console.log(e.market)
+          // alert(JSON.stringify(tickers)); 
+          if (response[index].market.indexOf(keyword) > -1||response[index].korean_name.indexOf(keyword) > -1) {
+            const price = (tickers[cnt].trade_price).toString()
+							.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+            const trade_price = ((tickers[cnt].trade_price-tickers[cnt].prev_closing_price).toFixed(2)).toString()
+							.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+
+            const acc_trade_price_24h = ((tickers[cnt].acc_trade_price_24h).toFixed(0)).toString()
+							.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+            const change=tickers[cnt].change
+            var color ;
+            if (change=="RISE") {
+              color="#d60000"
+            }else if(change=="FALL"){
+              color="#0051c7"
+            }else{
+              color="#ffffff"
+            }
+
+
+            const str2 = `
+                <tr>
+                        <td>${response[index].korean_name}<br><span id="market">${response[index].market}</span><br></td> 
+                        <td>${price}</td> 
+                        <td>${trade_price.fontcolor(color)}<br>
+                            ${((tickers[cnt].trade_price-tickers[cnt].prev_closing_price).toFixed(2)/tickers[cnt].prev_closing_price*100).toFixed(2)}%</td> 
+                        <td>${acc_trade_price_24h} </td>  
+                    </tr>
+                        `
+       
+            $('#table> tbody:last').append(str2);
+            //Table의 마지막 Row 다음에 Row 추가하기
+            cnt++;
+
+          }
+
+        };
+
+
+      });
+
+    };
+
+//  function func(response) { 
+
+  // };
+
+  </script>
+</body>
+
+</html>
