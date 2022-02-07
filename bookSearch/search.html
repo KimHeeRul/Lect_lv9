@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <link  rel="stylesheet"  href="search.css" type="text/css">
+
+    
+</head>
+<body>
+    <div class="wrap">
+        <header>
+            <h1>Daum Book Search</h1>
+                    <input id="key" type="text">
+                    <input id="search" type="button" onclick="func(key.value,1);" value="검색">
+            </header>
+    <div class="list"> </div>
+  
+    </div>
+
+
+    <script>
+        let end;
+
+        $('#key').keypress(function(e){
+            if (e.keyCode === 13) {
+            $("#search").trigger('click');
+        }
+        });
+     
+
+
+
+    function func(keyword,page) {
+        const book=[];
+        $.ajax({
+            method:"get",
+            url:"https://dapi.kakao.com/v3/search/book?", //?query=파이썬&page=페이지
+            data :{
+                query:keyword,
+                page: page,
+                // total_count:total_count
+            },
+            
+            
+            headers:{
+                Authorization:"KakaoAK 785d5503dc5c189a0e85eff26b08f1e9"
+            }
+        }).done(data=>{ //success,콜백함수 지정
+           
+            console.log(data);
+            end=data['meta'].is_end;
+
+
+            (data.documents).forEach(element =>{
+                book.push(element);
+                console.log("book.length:",book.length);
+            });
+
+            book.forEach(e =>{
+
+            //   const str = `<div class="content">
+            //            <a href="${e.url}"><img src="${e.thumbnail}"></a>
+            //            <p>
+            //            <span>제목:${e.title}</span><br>
+            //            <span>가격:${e.price} 세일가:${e.sale_price}</span> 
+            //            </p>
+            //         </div>`
+              const str2=`<div class="content" ">
+                <a href="${e.url}"><img class="img" id="false" src="${e.thumbnail}"/></a>
+                         <p>
+                        제목:${e.title}<br>
+                        가격:<del style="color:red">${e.price} -></del>
+                        세일가:<span="color:blue">${e.sale_price}원</span>
+                        </p>
+                        </div>`
+            
+              $('.list').append(str2);
+
+
+            
+
+             });
+            if(page===1){
+                var repeat=setInterval(function () {
+                        page+=1;
+                        if(end){
+                            clearInterval(repeat);
+                        }else{
+                            func(key.value,page);
+                        }
+
+                        },500);
+            }
+            
+           
+        });
+ 
+        
+    };
+    
+
+
+
+    </script>
+</body>
+</html>

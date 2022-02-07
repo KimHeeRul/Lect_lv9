@@ -1,0 +1,26 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');
+header{
+    margin: auto;
+    margin-top: 10%;
+    margin-bottom: 5%;
+    text-align: center;
+    width: 400px;
+}
+h1{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.list{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 14px;
+    
+}
+
+.content{
+    width: 250px;
+    height: 300px;
+    text-align: center;
+}
